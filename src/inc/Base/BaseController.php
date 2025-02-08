@@ -1,0 +1,44 @@
+<?php
+/**
+ * @package TourBooking
+ */
+
+namespace Inc\Base;
+
+class BaseController
+{
+    public $plugin;
+    public $plugin_url;
+    public $plugin_path;
+
+    // This used for (Settings & Fields) in Admin.php through (SettingsApi.php)
+    public $aiob_settings = [  ];
+    public $aiob_cpts     = [  ];
+
+    public function __construct()
+    {
+        $this->plugin_path = plugin_dir_path( dirname( __FILE__, 3 ) );
+        $this->plugin_url  = plugin_dir_url( dirname( __FILE__, 3 ) );
+        $this->plugin      = plugin_basename( dirname( __FILE__, 4 ) ) . '/aio-booking-plugin.php';
+
+        $this->settingsOptions();
+    }
+
+    public function settingsOptions()
+    {
+        $this->aiob_settings = [
+            'bookings_cpt'       => 'Activate Booking CPT',
+            'flights_cpt'        => 'Activate Flights CPT',
+            'tours_cpt'          => 'Activate Tours CPT',
+            'hotels_cpt'         => 'Activate Hotels CPT',
+            'payment_options'    => 'Activate Payment Options',
+            'shortcodes_manager' => 'Activate ShortCodes',
+         ];
+    }
+
+    public function isActivated( string $key )
+    {
+        $option = get_option( 'aiob_settings' );
+        return isset( $option[ $key ] ) && $option[ $key ];
+    }
+}
