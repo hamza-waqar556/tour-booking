@@ -18,6 +18,7 @@ final class Init
             Base\Enqueue::class,
             Base\SettingsLinks::class,
             Controllers\CustomPostType::class,
+            Pages\HotelCustomFields::class,
          ];
     }
 

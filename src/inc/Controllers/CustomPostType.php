@@ -75,6 +75,7 @@ class CustomPostType extends BaseController
                 'exclude_from_search'   => false,
                 'publicly_queryable'    => true,
                 'capability_type'       => 'post',
+                'menu_icon'             => 'dashicons-building',
              ],
             'flights_cpt' => [
                 'post_type'             => 'flight',
@@ -121,6 +122,7 @@ class CustomPostType extends BaseController
                 'exclude_from_search'   => false,
                 'publicly_queryable'    => true,
                 'capability_type'       => 'post',
+                'menu_icon'             => 'dashicons-airplane',
              ],
             'tours_cpt'   => [
                 'post_type'             => 'tour',
@@ -167,10 +169,11 @@ class CustomPostType extends BaseController
                 'exclude_from_search'   => false,
                 'publicly_queryable'    => true,
                 'capability_type'       => 'post',
+                'menu_icon'             => 'dashicons-universal-access-alt',
              ],
          ];
 
-         foreach ( $cpt_options as $option_key => $post_type ) {
+        foreach ( $cpt_options as $option_key => $post_type ) {
             if ( ! empty( $enabled_cpts[ $option_key ] ) && isset( $cpts[ $option_key ] ) ) {
                 $this->custom_post_types[ $option_key ] = $cpts[ $option_key ];
             }
@@ -227,6 +230,7 @@ class CustomPostType extends BaseController
                     'exclude_from_search' => $post_type[ 'exclude_from_search' ],
                     'publicly_queryable'  => $post_type[ 'publicly_queryable' ],
                     'capability_type'     => $post_type[ 'capability_type' ],
+                    'menu_icon'           => $post_type[ 'menu_icon' ],
                  ],
             );
         }
