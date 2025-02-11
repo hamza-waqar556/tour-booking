@@ -30,8 +30,9 @@ class BaseController
             'bookings_cpt'       => 'Activate Booking CPT',
             'flights_cpt'        => 'Activate Flights CPT',
             'tours_cpt'          => 'Activate Tours CPT',
+            'car_booking_cpt'    => 'Activate Car CPT',
             'hotels_cpt'         => 'Activate Hotels CPT',
-            'payment_options'    => 'Activate Payment Options',
+            'add_api_cpt'        => 'Activate API Integration',
             'shortcodes_manager' => 'Activate ShortCodes',
          ];
     }
