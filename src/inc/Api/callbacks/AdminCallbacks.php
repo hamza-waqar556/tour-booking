@@ -19,9 +19,9 @@ class AdminCallbacks extends BaseController
         return require_once "$this->plugin_path/src/templates/cpt.php";
     }
 
-    public function taxonomies()
+    public function apiSettings()
     {
-        return require_once "$this->plugin_path/src/templates/taxonomies.php";
+        return require_once "$this->plugin_path/src/templates/api-settings.php";
     }
 
     public function tourBookingTextExample()

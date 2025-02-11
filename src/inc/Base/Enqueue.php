@@ -18,7 +18,11 @@ class Enqueue extends BaseController
     public function enqueue()
     {
         // enqueue all our scripts
+
+        // CSS
         wp_enqueue_style( 'admin', $this->plugin_url . 'src/assets/scss/admin.css', [  ], '1.0.0' );
+
+        // JS
         wp_enqueue_script( 'admin', $this->plugin_url . 'src/assets/js/admin.js', [ 'jquery' ], '1.0.0', false );
     }
 }
