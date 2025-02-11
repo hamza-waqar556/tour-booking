@@ -1,4 +1,5 @@
 <?php
+
 // Get saved values
 $status          = get_post_meta( $post->ID, '_status', true );
 $featured        = get_post_meta( $post->ID, '_featured', true );

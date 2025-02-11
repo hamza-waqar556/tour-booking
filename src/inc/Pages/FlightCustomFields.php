@@ -20,16 +20,16 @@ class FlightFields extends BaseController
     public function createMetaBoxes()
     {
         add_meta_box(
-            'hotels_cpt_fields', // Meta Box ID
+            'flights_cpt_fields', // Meta Box ID
             'Additional Information', // Title
-            [ $this, 'addHotelsFields' ], // Callback Function
-            'hotel', // Change this to your CPT slug
+            [ $this, 'addCustomFields' ], // Callback Function
+            'flight', // Change this to your CPT slug
             'normal',
             'high'
         );
     }
 
-    public function addHotelsFields( $post )
+    public function addCustomFields( $post )
     {
         return require_once "$this->plugin_path/src/templates/flight-custom-fields.php";
     }
