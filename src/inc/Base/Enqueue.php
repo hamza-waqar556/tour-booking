@@ -24,5 +24,8 @@ class Enqueue extends BaseController
 
         // JS
         wp_enqueue_script( 'admin', $this->plugin_url . 'src/assets/js/admin.js', [ 'jquery' ], '1.0.0', false );
+
+        wp_enqueue_script( 'aiob-searchable-select', $this->plugin_url . 'src/assets/js/modules/aiob-searchable-select.js', [ 'jquery' ], '1.0.0', false );
+        wp_enqueue_script( 'aiob-multi-select', $this->plugin_url . 'src/assets/js/modules/aiob-multi-select.js', [ 'jquery' ], '1.0.0', false );
     }
 }

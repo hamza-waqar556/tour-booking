@@ -2,86 +2,154 @@
 // Get saved values
 $status          = get_post_meta( $post->ID, '_status', true );
 $featured        = get_post_meta( $post->ID, '_featured', true );
-$check_in        = get_post_meta( $post->ID, '_check_in', true );
-$check_out       = get_post_meta( $post->ID, '_check_out', true );
+$departure_time  = get_post_meta( $post->ID, '_departure_time', true );
+$arrival_time       = get_post_meta( $post->ID, '_arrival_time', true );
 $currency        = get_post_meta( $post->ID, '_currency', true );
 $user_email      = get_post_meta( $post->ID, '_user_email', true );
 $refundable      = get_post_meta( $post->ID, '_refundable', true );
-$rating          = get_post_meta( $post->ID, '_rating', true );
-$hotel_amenities = get_post_meta( $post->ID, '_hotel_amenities', true );
-$booking_age     = get_post_meta( $post->ID, '_booking_age', true );
+$adult_seat_price  = get_post_meta( $post->ID, '_adult_seat_price', true );
+$child_seat_price  = get_post_meta( $post->ID, '_child_seat_price', true );
+$infant_seat_price  = get_post_meta( $post->ID, '_infant_seat_price', true );
+$baggage  = get_post_meta( $post->ID, '_baggage', true );
+$cabin_baggage  = get_post_meta( $post->ID, '_cabin_baggage', true );
 
 // Get all users
 $users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
 
 // Nonce for security
 wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
+
+$user_emails = [];
+
+foreach ($users as $user) {
+    $user_emails[] = $user->user_email;
+}
+
+$email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
+
 ?>
 
-<p>
-    <label>Status:</label>
-    <input type="checkbox" name="status" value="1" <?php checked( $status, 1 ); ?> />
-</p>
+<div class="aiob-input-group">
+    
+    <div class="heading">Status:</div>
+    <div class="ui-toggle">
+        <input type="checkbox" id="flight-status" name="status" value="1" <?php checked( $status, 1 ); ?> />
+            <label for="flight-status">
+                <div></div>
+            </label>
+    </div>
+</div>
 
-<p>
-    <label>Featured:</label>
-    <input type="checkbox" name="featured" value="1" <?php checked( $featured, 1 ); ?> />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">Refundable:</div>
+    <div class="ui-toggle">
+        <input type="checkbox" id="flight-refundable" name="refundable" value="1" <?php checked( $refundable, 1 ); ?> />
+            <label for="flight-refundable">
+                <div></div>
+            </label>
+    </div>
+</div>
 
-<p>
-    <label>Check In:</label>
-    <input type="date" name="check_in" value="<?php echo esc_attr( $check_in ); ?>" />
-</p>
 
-<p>
-    <label>Check Out:</label>
-    <input type="date" name="check_out" value="<?php echo esc_attr( $check_out ); ?>" />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">airlines:</div>
+    <div id="flight-airlines" data-options=""></div>
+</div>
 
-<p>
-    <label>Currency:</label>
-    <select name="currency">
+<div class="aiob-input-group">
+    <div class="heading">from airport:</div>
+    <div id="from-airport" data-options=""></div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">to airport:</div>
+    <div id="to-airport" data-options=""></div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">adult seat price:</div>
+    <div class="input-wrapper">
+        <input type="number" name="adult_seat_price" value="1" <?php echo esc_attr( $adult_seat_price ); ?>/>
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">child seat price:</div>
+    <div class="input-wrapper">
+        <input type="number" name="child_seat_price" value="1" <?php echo esc_attr( $child_seat_price ); ?>/>
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">infant seat price:</div>
+    <div class="input-wrapper">
+        <input type="number" name="infant_seat_price" value="1" <?php echo esc_attr( $infant_seat_price ); ?> />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Duration:</div>
+    <div class="input-wrapper">
+        <input type="number" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Departure Time:</div>
+    <div class="input-wrapper">
+        <input type="datetime-local" name="departure_time" value="<?php echo esc_attr( $departure_time ); ?>" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Arrival Time:</div>
+    <div class="input-wrapper">
+    <input type="datetime-local" name="arrival_time" value="<?php echo esc_attr( $arrival_time ); ?>" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Baggage:</div>
+    <div class="input-wrapper">
+        <input type="text" name="baggage" value="<?php echo esc_attr( $baggage ); ?>" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Cabin Baggage:</div>
+    <div class="input-wrapper">
+        <input type="text" name="cabin_baggage" value="<?php echo esc_attr( $cabin_baggage ); ?>" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">Type:</div>
+
+    <div id="flight-type" data-options=""></div>
+
+    <!-- <select name="currency">
         <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
         <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
         <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select>
-</p>
+    </select> -->
+</div>
 
-<p>
-    <label>User Email:</label>
-    <select name="user_email">
-        <?php foreach ( $users as $user ): ?>
-            <option value="<?php echo esc_attr( $user->user_email ); ?>" <?php selected( $user_email, $user->user_email ); ?>>
-                <?php echo esc_html( $user->user_email ); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</p>
+<div class="aiob-input-group">
+    <div class="heading">Currency:</div>
 
-<p>
-    <label>Refundable:</label>
-    <input type="checkbox" name="refundable" value="1" <?php checked( $refundable, 1 ); ?> />
-</p>
+    <div id="flight-currency" data-options="USD,EUR,PK"></div>
 
-<p>
-    <label>Rating:</label>
-    <select name="rating">
-        <?php for ( $i = 0; $i <= 5; $i++ ): ?>
-            <option value="<?php echo $i; ?>" <?php selected( $rating, $i ); ?>><?php echo $i; ?></option>
-        <?php endfor; ?>
-    </select>
-</p>
+    <!-- <select name="currency">
+        <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
+        <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
+        <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
+    </select> -->
+</div>
 
-<p>
-    <label>Hotel Amenities:</label>
-    <select name="hotel_amenities[]" multiple>
-        <option value="wifi" <?php echo in_array( 'wifi', (array) $hotel_amenities ) ? 'selected' : ''; ?>>WiFi</option>
-        <option value="pool" <?php echo in_array( 'pool', (array) $hotel_amenities ) ? 'selected' : ''; ?>>Pool</option>
-        <option value="parking" <?php echo in_array( 'parking', (array) $hotel_amenities ) ? 'selected' : ''; ?>>Parking</option>
-    </select>
-</p>
+<div class="aiob-input-group">
+    <div class="heading">User Email:</div>
+    <div  data-options="<?= $email_json; ?>"></div>
+</div>
 
-<p>
-    <label>Booking Age Requirement:</label>
-    <input type="number" name="booking_age" value="<?php echo esc_attr( $booking_age ); ?>" />
-</p>
+
+

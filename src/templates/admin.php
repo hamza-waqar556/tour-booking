@@ -1,6 +1,6 @@
 <div class="wrap">
     <div class="tabs-parent-wrapper">
-        <h1>Dynamic Dashboard</h1>
+        <!-- <h1>Dynamic Dashboard</h1> -->
         <?php settings_errors(); ?>
 
         <ul class="nav nav-tabs">

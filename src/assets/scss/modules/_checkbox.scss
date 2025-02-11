@@ -64,5 +64,5 @@ $off: #8c8c8c;
 }
 
 div.ui-toggle {
-  @include ui-toggle(20px, $on, $off);
+  @include ui-toggle(16px, $on, $off);
 }

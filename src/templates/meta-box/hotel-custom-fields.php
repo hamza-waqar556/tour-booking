@@ -1,88 +1,183 @@
 <?php
 
 // Get saved values
-$status          = get_post_meta( $post->ID, '_status', true );
+$status        = get_post_meta( $post->ID, '_status', true );
 $featured        = get_post_meta( $post->ID, '_featured', true );
 $check_in        = get_post_meta( $post->ID, '_check_in', true );
 $check_out       = get_post_meta( $post->ID, '_check_out', true );
 $currency        = get_post_meta( $post->ID, '_currency', true );
 $user_email      = get_post_meta( $post->ID, '_user_email', true );
 $refundable      = get_post_meta( $post->ID, '_refundable', true );
+$star          = get_post_meta( $post->ID, '_star', true );
 $rating          = get_post_meta( $post->ID, '_rating', true );
 $hotel_amenities = get_post_meta( $post->ID, '_hotel_amenities', true );
 $booking_age     = get_post_meta( $post->ID, '_booking_age', true );
+$hotel_address     = get_post_meta( $post->ID, '_hotel_address', true );
+$hotel_location_code     = get_post_meta( $post->ID, '_hotel_location_code', true );
+$hotel_email     = get_post_meta( $post->ID, '_hotel_email', true );
+$hotel_website     = get_post_meta( $post->ID, '_hotel_website', true );
+$hotel_phone     = get_post_meta( $post->ID, '_hotel_phone', true );
 
 // Get all users
 $users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
 
 // Nonce for security
 wp_nonce_field( 'hotel_fields_nonce_action', 'hotel_fields_nonce' );
+
+
+$user_emails = [];
+
+foreach ($users as $user) {
+    $user_emails[] = $user->user_email;
+}
+
+$email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
+
 ?>
 
-<p>
-    <label>Status:</label>
-    <input type="checkbox" name="status" value="1" <?php checked( $status, 1 ); ?> />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">status:</div>
+    <div class="ui-toggle">
+        <input type="checkbox" id="hotel-status" name="status" value="1" <?php checked( $status, 1 ); ?> />
+            <label for="hotel-status">
+                <div></div>
+            </label>
+    </div>
+</div>
 
-<p>
-    <label>Featured:</label>
-    <input type="checkbox" name="featured" value="1" <?php checked( $featured, 1 ); ?> />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">refundable:</div>
+    <div class="ui-toggle">
+        <input type="checkbox" id="hotel-refundable" name="refundable" value="1" <?php checked( $refundable, 1 ); ?> />
+            <label for="hotel-refundable">
+                <div></div>
+            </label>
+    </div>
+</div>
 
-<p>
-    <label>Check In:</label>
-    <input type="date" name="check_in" value="<?php echo esc_attr( $check_in ); ?>" />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">featured:</div>
+    <div class="ui-toggle">
+        <input type="checkbox" id="hotel-featured" name="featured" value="1" <?php checked( $featured, 1 ); ?> />
+            <label for="hotel-featured">
+                <div></div>
+            </label>
+    </div>
+</div>
 
-<p>
-    <label>Check Out:</label>
+
+<div class="aiob-input-group">
+    <div class="heading">check in:</div>
+    <div class="input-wrapper">
+       <input type="date" name="check_in" value="<?php echo esc_attr( $check_in ); ?>" />
+    </div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">check out:</div>
+    <div class="input-wrapper">
     <input type="date" name="check_out" value="<?php echo esc_attr( $check_out ); ?>" />
-</p>
+    </div>
+</div>
 
-<p>
-    <label>Currency:</label>
-    <select name="currency">
+<div class="aiob-input-group">
+    <div class="heading">Currency:</div>
+
+    <div id="hotel-currency" data-options="USD,EUR,PK"></div>
+
+    <!-- <select name="currency">
         <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
         <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
         <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select>
-</p>
+    </select> -->
+</div>
 
-<p>
-    <label>User Email:</label>
-    <select name="user_email">
-        <?php foreach ( $users as $user ): ?>
-            <option value="<?php echo esc_attr( $user->user_email ); ?>" <?php selected( $user_email, $user->user_email ); ?>>
-                <?php echo esc_html( $user->user_email ); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</p>
+<div class="aiob-input-group">
+    <div class="heading">User Email:</div>
+    <div  data-options="<?= $email_json; ?>"></div>
+</div>
 
-<p>
-    <label>Refundable:</label>
-    <input type="checkbox" name="refundable" value="1" <?php checked( $refundable, 1 ); ?> />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">stars:</div>
+    <div class="custon-select-wrapper">
+        <select name="star">
+            <?php for ( $i = 0; $i <= 7; $i++ ): ?>
+                <option value="<?php echo $i; ?>" <?php selected( $star, $i ); ?>><?php echo $i; ?></option>
+            <?php endfor; ?>
+        </select>
+    </div>
+</div>
 
-<p>
-    <label>Rating:</label>
-    <select name="rating">
-        <?php for ( $i = 0; $i <= 5; $i++ ): ?>
-            <option value="<?php echo $i; ?>" <?php selected( $rating, $i ); ?>><?php echo $i; ?></option>
-        <?php endfor; ?>
-    </select>
-</p>
+<div class="aiob-input-group">
+    <div class="heading">ratings:</div>
+    <div class="custon-select-wrapper">
+        <select name="rating">
+            <?php for ( $i = 0; $i <= 5; $i++ ): ?>
+                <option value="<?php echo $i; ?>" <?php selected( $rating, $i ); ?>><?php echo $i; ?></option>
+            <?php endfor; ?>
+        </select>
+    </div>
+</div>
 
-<p>
-    <label>Hotel Amenities:</label>
-    <select name="hotel_amenities[]" multiple>
-        <option value="wifi" <?php echo in_array( 'wifi', (array) $hotel_amenities ) ? 'selected' : ''; ?>>WiFi</option>
-        <option value="pool" <?php echo in_array( 'pool', (array) $hotel_amenities ) ? 'selected' : ''; ?>>Pool</option>
-        <option value="parking" <?php echo in_array( 'parking', (array) $hotel_amenities ) ? 'selected' : ''; ?>>Parking</option>
-    </select>
-</p>
 
-<p>
-    <label>Booking Age Requirement:</label>
-    <input type="number" name="booking_age" value="<?php echo esc_attr( $booking_age ); ?>" />
-</p>
+<div class="aiob-input-group">
+    <div class="heading">Hotel Amenities:</div>
+    <div class="aiob-multi-select" data-multi-options="<?= $email_json; ?>">
+        <div class="aiob-selected-options">Select options</div>
+        <div class="multi-select-dropdown"></div>
+    </div>
+</div>
+
+
+
+<div class="aiob-input-group">
+    <div class="heading">Booking Age Requirement:</div>
+    <div class="input-wrapper">
+      <input type="number" name="booking_age" value="<?php echo esc_attr( $booking_age ); ?>" />
+    </div>
+</div>
+
+
+<div class="aiob-input-group">
+    <div class="heading">location:</div>
+    <div  data-options="<?= $email_json; ?>"></div>
+</div>
+
+<div class="aiob-input-group">
+    <div class="heading">address:</div>
+    <div class="input-wrapper">
+      <input type="text" name="hotel_address" value="<?php echo esc_attr( $hotel_address ); ?>" />
+    </div>
+</div>
+
+
+<div class="aiob-input-group">
+    <div class="heading">location code:</div>
+    <div class="input-wrapper">
+      <input type="text" name="hotel_location_code" value="<?php echo esc_attr( $hotel_location_code ); ?>" />
+    </div>
+</div>
+
+
+<div class="aiob-input-group">
+    <div class="heading">hotel email:</div>
+    <div class="input-wrapper">
+      <input type="email" name="hotel_email" value="<?php echo esc_attr( $hotel_email ); ?>" />
+    </div>
+</div>
+
+
+<div class="aiob-input-group">
+    <div class="heading">hotel website:</div>
+    <div class="input-wrapper">
+      <input type="text" name="hotel_website" value="<?php echo esc_attr( $hotel_website ); ?>" />
+    </div>
+</div>
+
+
+<div class="aiob-input-group">
+    <div class="heading">hotel phone number:</div>
+    <div class="input-wrapper">
+      <input type="tel" name="hotel_phone" value="<?php echo esc_attr( $hotel_phone ); ?>" />
+    </div>
+</div>
