@@ -11,17 +11,30 @@ class AdminCallbacks extends BaseController
 {
     public function dashboard()
     {
-        return require_once "$this->plugin_path/src/templates/admin.php";
+        return require_once "{$this->plugin_path}src/templates/admin.php";
     }
 
-    public function cpt()
+    public function flightAirports()
     {
-        return require_once "$this->plugin_path/src/templates/cpt.php";
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'airports';
+        $airports   = $wpdb->get_results( "SELECT * FROM $table_name", ARRAY_A );
+
+        return require_once "{$this->plugin_path}src/templates/flight-airports.php";
+    }
+
+    public function flightAirlines()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'airlines';
+        $airlines   = $wpdb->get_results( "SELECT * FROM $table_name", ARRAY_A );
+
+        return require_once "{$this->plugin_path}src/templates/flight-airlines.php";
     }
 
     public function apiSettings()
     {
-        return require_once "$this->plugin_path/src/templates/api-settings.php";
+        return require_once "{$this->plugin_path}src/templates/api-settings.php";
     }
 
     public function tourBookingTextExample()

@@ -19,6 +19,7 @@ final class Init
             Base\SettingsLinks::class,
             Controllers\CustomPostType::class,
             Controllers\CreateMetaBoxes::class,
+            Pages\FlightAirports::class,
          ];
     }
 
