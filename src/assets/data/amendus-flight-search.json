@@ -1,0 +1,695 @@
+{
+  "meta": {
+    "count": 5,
+    "links": {
+      "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=PAR&destinationLocationCode=ICN&departureDate=2025-03-15&returnDate=2025-03-16&adults=2&max=5"
+    }
+  },
+  "data": [
+    {
+      "type": "flight-offer",
+      "id": "1",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-03-15",
+      "lastTicketingDateTime": "2025-03-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT17H25M",
+          "segments": [
+            {
+              "departure": { "iataCode": "CDG", "at": "2025-03-15T10:00:00" },
+              "arrival": { "iataCode": "FRA", "at": "2025-03-15T14:30:00" },
+              "carrierCode": "6X",
+              "number": "501",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT4H30M",
+              "id": "1",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": { "iataCode": "FRA", "at": "2025-03-15T18:10:00" },
+              "arrival": { "iataCode": "ICN", "at": "2025-03-16T11:25:00" },
+              "carrierCode": "6X",
+              "number": "9744",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT9H15M",
+              "id": "2",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT12H30M",
+          "segments": [
+            {
+              "departure": { "iataCode": "ICN", "at": "2025-03-16T14:05:00" },
+              "arrival": { "iataCode": "CDG", "at": "2025-03-16T18:35:00" },
+              "carrierCode": "6X",
+              "number": "956",
+              "aircraft": { "code": "332" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT12H30M",
+              "id": "11",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "437.26",
+        "base": "266.00",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "437.26"
+      },
+      "pricingOptions": {
+        "fareType": ["PUBLISHED"],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": ["6X"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "1",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "2",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        },
+        {
+          "travelerId": "2",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "1",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "2",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "2",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-03-15",
+      "lastTicketingDateTime": "2025-03-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT17H25M",
+          "segments": [
+            {
+              "departure": { "iataCode": "CDG", "at": "2025-03-15T10:00:00" },
+              "arrival": { "iataCode": "FRA", "at": "2025-03-15T14:30:00" },
+              "carrierCode": "6X",
+              "number": "550",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT4H30M",
+              "id": "3",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": { "iataCode": "FRA", "at": "2025-03-15T18:10:00" },
+              "arrival": { "iataCode": "ICN", "at": "2025-03-16T11:25:00" },
+              "carrierCode": "6X",
+              "number": "9744",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT9H15M",
+              "id": "4",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT12H30M",
+          "segments": [
+            {
+              "departure": { "iataCode": "ICN", "at": "2025-03-16T14:05:00" },
+              "arrival": { "iataCode": "CDG", "at": "2025-03-16T18:35:00" },
+              "carrierCode": "6X",
+              "number": "956",
+              "aircraft": { "code": "332" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT12H30M",
+              "id": "11",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "437.26",
+        "base": "266.00",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "437.26"
+      },
+      "pricingOptions": {
+        "fareType": ["PUBLISHED"],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": ["6X"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "3",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "4",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        },
+        {
+          "travelerId": "2",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "3",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "4",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "3",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-03-15",
+      "lastTicketingDateTime": "2025-03-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT17H25M",
+          "segments": [
+            {
+              "departure": { "iataCode": "CDG", "at": "2025-03-15T10:00:00" },
+              "arrival": { "iataCode": "FRA", "at": "2025-03-15T14:30:00" },
+              "carrierCode": "6X",
+              "number": "553",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT4H30M",
+              "id": "5",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": { "iataCode": "FRA", "at": "2025-03-15T18:10:00" },
+              "arrival": { "iataCode": "ICN", "at": "2025-03-16T11:25:00" },
+              "carrierCode": "6X",
+              "number": "9744",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT9H15M",
+              "id": "6",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT12H30M",
+          "segments": [
+            {
+              "departure": { "iataCode": "ICN", "at": "2025-03-16T14:05:00" },
+              "arrival": { "iataCode": "CDG", "at": "2025-03-16T18:35:00" },
+              "carrierCode": "6X",
+              "number": "956",
+              "aircraft": { "code": "332" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT12H30M",
+              "id": "11",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "437.26",
+        "base": "266.00",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "437.26"
+      },
+      "pricingOptions": {
+        "fareType": ["PUBLISHED"],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": ["6X"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "5",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "6",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        },
+        {
+          "travelerId": "2",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "5",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "6",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "4",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-03-15",
+      "lastTicketingDateTime": "2025-03-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT17H25M",
+          "segments": [
+            {
+              "departure": { "iataCode": "CDG", "at": "2025-03-15T10:00:00" },
+              "arrival": { "iataCode": "FRA", "at": "2025-03-15T14:30:00" },
+              "carrierCode": "6X",
+              "number": "554",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT4H30M",
+              "id": "7",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": { "iataCode": "FRA", "at": "2025-03-15T18:10:00" },
+              "arrival": { "iataCode": "ICN", "at": "2025-03-16T11:25:00" },
+              "carrierCode": "6X",
+              "number": "9744",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT9H15M",
+              "id": "8",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT12H30M",
+          "segments": [
+            {
+              "departure": { "iataCode": "ICN", "at": "2025-03-16T14:05:00" },
+              "arrival": { "iataCode": "CDG", "at": "2025-03-16T18:35:00" },
+              "carrierCode": "6X",
+              "number": "956",
+              "aircraft": { "code": "332" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT12H30M",
+              "id": "11",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "437.26",
+        "base": "266.00",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "437.26"
+      },
+      "pricingOptions": {
+        "fareType": ["PUBLISHED"],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": ["6X"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "7",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "8",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        },
+        {
+          "travelerId": "2",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "7",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "8",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "5",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-03-15",
+      "lastTicketingDateTime": "2025-03-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT17H25M",
+          "segments": [
+            {
+              "departure": { "iataCode": "CDG", "at": "2025-03-15T10:00:00" },
+              "arrival": { "iataCode": "FRA", "at": "2025-03-15T14:30:00" },
+              "carrierCode": "6X",
+              "number": "555",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT4H30M",
+              "id": "9",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": { "iataCode": "FRA", "at": "2025-03-15T18:10:00" },
+              "arrival": { "iataCode": "ICN", "at": "2025-03-16T11:25:00" },
+              "carrierCode": "6X",
+              "number": "9744",
+              "aircraft": { "code": "744" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT9H15M",
+              "id": "10",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        },
+        {
+          "duration": "PT12H30M",
+          "segments": [
+            {
+              "departure": { "iataCode": "ICN", "at": "2025-03-16T14:05:00" },
+              "arrival": { "iataCode": "CDG", "at": "2025-03-16T18:35:00" },
+              "carrierCode": "6X",
+              "number": "956",
+              "aircraft": { "code": "332" },
+              "operating": { "carrierCode": "6X" },
+              "duration": "PT12H30M",
+              "id": "11",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "437.26",
+        "base": "266.00",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "437.26"
+      },
+      "pricingOptions": {
+        "fareType": ["PUBLISHED"],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": ["6X"],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "9",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "10",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        },
+        {
+          "travelerId": "2",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": { "currency": "EUR", "total": "218.63", "base": "133.00" },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "9",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "10",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            },
+            {
+              "segmentId": "11",
+              "cabin": "ECONOMY",
+              "fareBasis": "YCNV1",
+              "class": "Y",
+              "includedCheckedBags": { "quantity": 9 }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dictionaries": {
+    "locations": {
+      "FRA": { "cityCode": "FRA", "countryCode": "DE" },
+      "ICN": { "cityCode": "SEL", "countryCode": "KR" },
+      "CDG": { "cityCode": "PAR", "countryCode": "FR" }
+    },
+    "aircraft": { "332": "AIRBUS A330-200", "744": "BOEING 747-400" },
+    "currencies": { "EUR": "EURO" },
+    "carriers": { "6X": "AMADEUS SIX" }
+  }
+}
