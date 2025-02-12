@@ -25,7 +25,7 @@ class CreateMetaBoxes extends BaseController
         $this->meta_boxes = [
             [
                 'flight',
-                [ 'status', 'featured', 'departure_time', 'arrival_time', 'currency', 'user_email', 'refundable', 'adult_seat_price', 'child_seat_price', 'infant_seat_price', 'baggage', 'cabin_baggage' ],
+                [ 'status', 'refundable', 'flight_airlines', 'from_airport', 'to_airport', 'departure_time', 'arrival_time', 'user_email', 'adult_seat_price', 'child_seat_price', 'infant_seat_price', 'duration', 'baggage', 'cabin_baggage', 'flight_type', 'flight_currency' ],
                 'flight_fields_nonce',
                 'flight_fields_nonce_action',
                 'flight-custom-fields.php',
@@ -44,6 +44,14 @@ class CreateMetaBoxes extends BaseController
                 'tour_fields_nonce_action',
                 'tour-custom-fields.php',
              ],
+            [
+                'api',
+                [ 'status', 'api_name', 'api_type', 'api_key', 'secret_key', '', '' ],
+                'api_fields_nonce',
+                'api_fields_nonce_action',
+                'api-form.php',
+             ],
+
          ];
 
         foreach ( $this->meta_boxes as $meta_box ) {

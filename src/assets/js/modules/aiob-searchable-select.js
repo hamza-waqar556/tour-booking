@@ -2,13 +2,13 @@ class SearchableSelect {
     constructor(container) {
         this.container = container;
         this.options = this.getOptionsFromAttribute();
+        this.hiddenInput = document.querySelector(`#${this.container.id}-input`); // Hidden input field
         this.init();
     }
 
     getOptionsFromAttribute() {
-        const optionsString = this.container.getAttribute('data-options');
         try {
-            return optionsString ? JSON.parse(optionsString) : [];
+            return JSON.parse(this.container.getAttribute('data-options')) || [];
         } catch (error) {
             console.error("Invalid JSON in data-options:", error);
             return [];
@@ -16,29 +16,31 @@ class SearchableSelect {
     }
 
     init() {
-        // Create the dropdown structure
         this.container.classList.add('aiob-searchable-dropdown');
+
         this.input = document.createElement('input');
         this.input.setAttribute('type', 'text');
-        // this.input.setAttribute('placeholder', 'Search...');
         this.list = document.createElement('ul');
         this.list.classList.add('aiob-searchable-dropdown-list');
 
-        // Append elements to container
         this.container.appendChild(this.input);
         this.container.appendChild(this.list);
 
-        // Populate dropdown
         this.populateList();
 
-        // Event listeners
+        // Pre-fill input if there's a stored value
+        if (this.hiddenInput.value) {
+            this.input.value = this.hiddenInput.value;
+        }
+
+        // Event Listeners
         this.input.addEventListener('click', () => this.toggleDropdown(true));
         this.input.addEventListener('keyup', () => this.filterOptions());
         document.addEventListener('click', (event) => this.handleClickOutside(event));
     }
 
     populateList() {
-        this.list.innerHTML = ''; // Clear existing options
+        this.list.innerHTML = '';
         this.options.forEach(option => {
             const li = document.createElement('li');
             li.textContent = option;
@@ -54,16 +56,15 @@ class SearchableSelect {
     filterOptions() {
         const searchValue = this.input.value.toLowerCase();
         this.list.childNodes.forEach(li => {
-            if (li.textContent.toLowerCase().includes(searchValue)) {
-                li.style.display = 'block';
-            } else {
-                li.style.display = 'none';
-            }
+            li.style.display = li.textContent.toLowerCase().includes(searchValue) ? 'block' : 'none';
         });
     }
 
     selectOption(value) {
         this.input.value = value;
+        if (this.hiddenInput) {
+            this.hiddenInput.value = value; // ✅ Store selected value in hidden input
+        }
         this.toggleDropdown(false);
     }
 

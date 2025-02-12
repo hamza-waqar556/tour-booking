@@ -1,17 +1,21 @@
 <?php
 // Get saved values
 $status          = get_post_meta( $post->ID, '_status', true );
-$featured        = get_post_meta( $post->ID, '_featured', true );
+$refundable      = get_post_meta( $post->ID, '_refundable', true );
+$flight_airlines      = get_post_meta( $post->ID, '_flight_airlines', true );
+$from_airport      = get_post_meta( $post->ID, '_from_airport', true );
+$to_airport      = get_post_meta( $post->ID, '_to_airport', true );
 $departure_time  = get_post_meta( $post->ID, '_departure_time', true );
 $arrival_time       = get_post_meta( $post->ID, '_arrival_time', true );
-$currency        = get_post_meta( $post->ID, '_currency', true );
 $user_email      = get_post_meta( $post->ID, '_user_email', true );
-$refundable      = get_post_meta( $post->ID, '_refundable', true );
 $adult_seat_price  = get_post_meta( $post->ID, '_adult_seat_price', true );
 $child_seat_price  = get_post_meta( $post->ID, '_child_seat_price', true );
 $infant_seat_price  = get_post_meta( $post->ID, '_infant_seat_price', true );
+$duration  = get_post_meta( $post->ID, '_duration', true );
 $baggage  = get_post_meta( $post->ID, '_baggage', true );
 $cabin_baggage  = get_post_meta( $post->ID, '_cabin_baggage', true );
+$flight_type  = get_post_meta( $post->ID, '_flight_type', true );
+$flight_currency  = get_post_meta( $post->ID, '_flight_currency', true );
 
 // Get all users
 $users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
@@ -50,47 +54,50 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     </div>
 </div>
 
-
 <div class="aiob-input-group">
-    <div class="heading">airlines:</div>
-    <div id="flight-airlines" data-options=""></div>
+    <div class="heading">Airlines:</div>
+    <div id="flight-airlines" data-options='["PK", "UK", "LHD"]'></div>
+    <input type="hidden" name="flight_airlines" id="flight-airlines-input" value="<?php echo esc_attr( $flight_airlines ); ?>">
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">from airport:</div>
-    <div id="from-airport" data-options=""></div>
+    <div id="from-airport" data-options='["PK", "UK", "LHD"]'></div>
+    <input type="hidden" name="from_airport" id="from-airport-input" value="<?php echo esc_attr( $from_airport ); ?>">
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">to airport:</div>
-    <div id="to-airport" data-options=""></div>
+    <div id="to-airport" data-options='["PK", "UK", "LHD"]'></div>
+    <input type="hidden" name="to_airport" id="to-airport-input" value="<?php echo esc_attr( $to_airport ); ?>">
 </div>
+
 
 <div class="aiob-input-group">
     <div class="heading">adult seat price:</div>
     <div class="input-wrapper">
-        <input type="number" name="adult_seat_price" value="1" <?php echo esc_attr( $adult_seat_price ); ?>/>
+        <input type="number" name="adult_seat_price" value="<?php echo esc_attr( $adult_seat_price ); ?>" />
     </div>
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">child seat price:</div>
     <div class="input-wrapper">
-        <input type="number" name="child_seat_price" value="1" <?php echo esc_attr( $child_seat_price ); ?>/>
+        <input type="number" name="child_seat_price" value="<?php echo esc_attr( $child_seat_price ); ?>" />
     </div>
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">infant seat price:</div>
     <div class="input-wrapper">
-        <input type="number" name="infant_seat_price" value="1" <?php echo esc_attr( $infant_seat_price ); ?> />
+        <input type="number" name="infant_seat_price" value="<?php echo esc_attr( $infant_seat_price ); ?>"  />
     </div>
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">Duration:</div>
     <div class="input-wrapper">
-        <input type="number" />
+        <input type="number" name="duration" value="<?php echo esc_attr( $duration ); ?>" />
     </div>
 </div>
 
@@ -122,33 +129,24 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     </div>
 </div>
 
+
+
 <div class="aiob-input-group">
-    <div class="heading">Type:</div>
-
-    <div id="flight-type" data-options=""></div>
-
-    <!-- <select name="currency">
-        <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
-        <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
-        <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select> -->
+    <div class="heading">flight type:</div>
+    <div id="flight-type" data-options='["Economy", "Economy Premium", "Business" ,"First"]'></div>
+    <input type="hidden" name="flight_type" id="flight-type-input" value="<?php echo esc_attr( $flight_type ); ?>">
 </div>
 
 <div class="aiob-input-group">
-    <div class="heading">Currency:</div>
-
-    <div id="flight-currency" data-options="USD,EUR,PK"></div>
-
-    <!-- <select name="currency">
-        <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
-        <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
-        <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select> -->
+    <div class="heading">currency:</div>
+    <div id="flight-currency" data-options='["PKR", "USD", "EUR"]'></div>
+    <input type="hidden" name="flight_currency" id="flight-currency-input" value="<?php echo esc_attr( $flight_currency ); ?>">
 </div>
 
 <div class="aiob-input-group">
     <div class="heading">User Email:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="user-email" data-options="<?= $email_json; ?>"></div>
+    <input type="hidden" name="user_email" id="user-email-input" value="<?php echo esc_attr( $user_email ); ?>">
 </div>
 
 

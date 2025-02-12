@@ -13,7 +13,7 @@ $child_tour_price     = get_post_meta( $post->ID, '_achild_tour_price', true );
 $users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
 
 // Nonce for security
-wp_nonce_field( 'hotel_fields_nonce_action', 'hotel_fields_nonce' );
+wp_nonce_field( 'tour_fields_nonce_action', 'tour_fields_nonce' );
 
 
 $user_emails = [];
