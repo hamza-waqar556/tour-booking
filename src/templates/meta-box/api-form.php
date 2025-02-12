@@ -61,3 +61,4 @@ wp_nonce_field( 'api_fields_nonce_action', 'api_fields_nonce' );
         <input type="number" name="markup" value="<?php echo esc_attr( $markup ); ?>" />
     </div>
 </div>
+

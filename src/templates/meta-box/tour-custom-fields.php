@@ -1,7 +1,7 @@
 <?php
 
 // Get saved values
-$currency        = get_post_meta( $post->ID, '_currency', true );
+$tour_currency        = get_post_meta( $post->ID, '_tour_currency', true );
 $refundable     = get_post_meta( $post->ID, '_refundable', true );
 $user_email      = get_post_meta( $post->ID, '_user_email', true );
 $star          = get_post_meta( $post->ID, '_star', true );
@@ -39,15 +39,9 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 
 <div class="aiob-input-group">
-    <div class="heading">Currency:</div>
-
-    <div id="tour-currency" data-options="USD,EUR,PK"></div>
-
-    <!-- <select name="currency">
-        <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
-        <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
-        <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select> -->
+    <div class="heading">currency:</div>
+    <div id="tour-currency" data-options='["PKR", "USD", "EUR"]'></div>
+    <input type="hidden" name="tour_currency" id="tour-currency-input" value="<?php echo esc_attr( $tour_currency ); ?>">
 </div>
 
 <div class="aiob-input-group">
@@ -73,10 +67,13 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     </div>
 </div>
 
+
 <div class="aiob-input-group">
     <div class="heading">tour inclusions:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="tour-currency" data-options='["PKR", "USD", "EUR"]'></div>
+    <input type="hidden" name="tour_currency" id="tour-currency-input" value="<?php echo esc_attr( $tour_currency ); ?>">
 </div>
+
 
 <div class="aiob-input-group">
     <div class="heading">tour exclusions:</div>

@@ -39,7 +39,7 @@ class CreateMetaBoxes extends BaseController
              ],
             [
                 'tour',
-                [ 'currency', 'refundable', 'star', 'rating', 'adult_tour_price', 'child_tour_price' ],
+                [ 'tour_currency', 'refundable', 'star', 'rating', 'adult_tour_price', 'child_tour_price' ],
                 'tour_fields_nonce',
                 'tour_fields_nonce_action',
                 'tour-custom-fields.php',
