@@ -32,7 +32,7 @@ class CreateMetaBoxes extends BaseController
              ],
             [
                 'hotel',
-                [ 'status', 'featured', 'check_in', 'check_out', 'currency', 'user_email', 'refundable', 'star', 'rating', 'hotel_amenities', 'booking_age', 'hotel_address', 'hotel_location_code', 'hotel_email', 'hotel_website', 'hotel_phone' ],
+                [ 'status', 'featured', 'check_in', 'check_out', 'hotel_currency', 'user_email', 'refundable', 'star', 'rating', 'hotel_amenities', 'booking_age', 'hotel_location','hotel_address', 'hotel_location_code', 'hotel_email', 'hotel_website', 'hotel_phone' ],
                 'hotel_fields_nonce',
                 'hotel_fields_nonce_action',
                 'hotel-custom-fields.php',
@@ -46,7 +46,7 @@ class CreateMetaBoxes extends BaseController
              ],
             [
                 'api',
-                [ 'status', 'api_name', 'api_type', 'api_key', 'secret_key', '', '' ],
+                [ 'status', 'api_name', 'api_type', 'api_key', 'secret_key', 'markup' ],
                 'api_fields_nonce',
                 'api_fields_nonce_action',
                 'api-form.php',

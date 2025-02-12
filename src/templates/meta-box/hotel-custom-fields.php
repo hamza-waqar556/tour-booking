@@ -5,13 +5,14 @@ $status        = get_post_meta( $post->ID, '_status', true );
 $featured        = get_post_meta( $post->ID, '_featured', true );
 $check_in        = get_post_meta( $post->ID, '_check_in', true );
 $check_out       = get_post_meta( $post->ID, '_check_out', true );
-$currency        = get_post_meta( $post->ID, '_currency', true );
+$hotel_currency        = get_post_meta( $post->ID, '_hotel_currency', true );
 $user_email      = get_post_meta( $post->ID, '_user_email', true );
 $refundable      = get_post_meta( $post->ID, '_refundable', true );
 $star          = get_post_meta( $post->ID, '_star', true );
 $rating          = get_post_meta( $post->ID, '_rating', true );
 $hotel_amenities = get_post_meta( $post->ID, '_hotel_amenities', true );
 $booking_age     = get_post_meta( $post->ID, '_booking_age', true );
+$hotel_location     = get_post_meta( $post->ID, '_hotel_location', true );
 $hotel_address     = get_post_meta( $post->ID, '_hotel_address', true );
 $hotel_location_code     = get_post_meta( $post->ID, '_hotel_location_code', true );
 $hotel_email     = get_post_meta( $post->ID, '_hotel_email', true );
@@ -80,21 +81,18 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     </div>
 </div>
 
+
 <div class="aiob-input-group">
-    <div class="heading">Currency:</div>
-
-    <div id="hotel-currency" data-options="USD,EUR,PK"></div>
-
-    <!-- <select name="currency">
-        <option value="USD" <?php selected( $currency, 'USD' ); ?>>USD</option>
-        <option value="EUR" <?php selected( $currency, 'EUR' ); ?>>EUR</option>
-        <option value="GBP" <?php selected( $currency, 'GBP' ); ?>>GBP</option>
-    </select> -->
+    <div class="heading">currency:</div>
+    <div id="hotel-currency" data-options='["PKR", "USD", "EUR"]'></div>
+    <input type="hidden" name="hotel_currency" id="hotel-currency-input" value="<?php echo esc_attr( $hotel_currency ); ?>">
 </div>
+
 
 <div class="aiob-input-group">
     <div class="heading">User Email:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="user-email" data-options="<?= $email_json; ?>"></div>
+    <input type="hidden" name="user_email" id="user-email-input" value="<?php echo esc_attr( $user_email ); ?>">
 </div>
 
 <div class="aiob-input-group">
@@ -122,11 +120,14 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 <div class="aiob-input-group">
     <div class="heading">Hotel Amenities:</div>
-    <div class="aiob-multi-select" data-multi-options="<?= $email_json; ?>">
+    <div class="aiob-multi-select" data-multi-options='["PKR", "USD", "EUR"]'>
         <div class="aiob-selected-options">Select options</div>
         <div class="multi-select-dropdown"></div>
+        <input type="hidden" name="hotel_amenities" id="hotel-amenities-input" value="<?php echo esc_attr( implode(',', (array) $hotel_amenities) ); ?>">
     </div>
 </div>
+
+
 
 
 
@@ -140,8 +141,10 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 <div class="aiob-input-group">
     <div class="heading">location:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="hotel-location" data-options='["Faisalabad", "lahore", "Islamabad"]'></div>
+    <input type="hidden" name="hotel_location" id="hotel-location-input" value="<?php echo esc_attr( $hotel_location ); ?>">
 </div>
+
 
 <div class="aiob-input-group">
     <div class="heading">address:</div>

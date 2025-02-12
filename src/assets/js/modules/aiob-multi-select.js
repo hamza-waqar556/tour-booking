@@ -3,18 +3,18 @@ class MultiSelect {
         this.element = element;
         this.selectedContainer = element.querySelector('.aiob-selected-options');
         this.dropdown = element.querySelector('.multi-select-dropdown');
+        this.hiddenInput = element.querySelector('input[name="hotel_amenities"]'); // Hidden input
 
-        // Ensure attribute exists and parse JSON
+        // Parse multi-options from attribute
         this.options = this.getOptionsFromAttribute();
+        this.selectedValues = this.hiddenInput.value ? this.hiddenInput.value.split(',') : [];
 
-        this.selectedValues = [];
         this.init();
     }
 
     getOptionsFromAttribute() {
-        const optionsAttr = this.element.getAttribute('data-multi-options');
         try {
-            return optionsAttr ? JSON.parse(optionsAttr) : [];
+            return JSON.parse(this.element.getAttribute('data-multi-options')) || [];
         } catch (error) {
             console.error("Invalid JSON in data-multi-options:", error);
             return [];
@@ -28,6 +28,7 @@ class MultiSelect {
         });
         document.addEventListener('click', (e) => this.handleClickOutside(e));
         this.renderOptions();
+        this.updateSelectedDisplay(); // Load selected values
     }
 
     toggleDropdown() {
@@ -45,19 +46,24 @@ class MultiSelect {
         this.options.forEach(option => {
             const div = document.createElement('div');
             div.textContent = option;
+            div.classList.add('multi-select-option');
             div.addEventListener('click', () => this.selectOption(option));
+
+            // Highlight selected options
+            if (this.selectedValues.includes(option)) {
+                div.classList.add('selected');
+            }
+
             this.dropdown.appendChild(div);
         });
     }
 
     selectOption(option) {
-        if (this.selectedValues.includes(option)) return;
-        this.selectedValues.push(option);
-        this.updateSelectedDisplay();
-    }
-
-    removeOption(option) {
-        this.selectedValues = this.selectedValues.filter(val => val !== option);
+        if (this.selectedValues.includes(option)) {
+            this.selectedValues = this.selectedValues.filter(val => val !== option);
+        } else {
+            this.selectedValues.push(option);
+        }
         this.updateSelectedDisplay();
     }
 
@@ -83,9 +89,18 @@ class MultiSelect {
                 this.selectedContainer.appendChild(span);
             });
         }
+
+        // ✅ Update hidden input field
+        this.hiddenInput.value = this.selectedValues.join(',');
+    }
+
+    removeOption(option) {
+        this.selectedValues = this.selectedValues.filter(val => val !== option);
+        this.updateSelectedDisplay();
     }
 }
 
+// Auto-initialize
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.aiob-multi-select').forEach(el => new MultiSelect(el));
 });

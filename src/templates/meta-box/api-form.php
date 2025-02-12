@@ -5,6 +5,7 @@ $api_name      = get_post_meta( $post->ID, '_api_name', true );
 $api_type      = get_post_meta( $post->ID, '_api_type', true );
 $api_key      = get_post_meta( $post->ID, '_api_key', true );
 $secret_key      = get_post_meta( $post->ID, '_secret_key', true );
+$markup      = get_post_meta( $post->ID, '_markup', true );
 
 
 
@@ -49,5 +50,14 @@ wp_nonce_field( 'api_fields_nonce_action', 'api_fields_nonce' );
     <div class="heading">secret key:</div>
     <div class="input-wrapper">
         <input type="text" name="secret_key" value="<?php echo esc_attr( $secret_key ); ?>" />
+    </div>
+</div>
+
+
+
+<div class="aiob-input-group">
+    <div class="heading">markup percentage(%):</div>
+    <div class="input-wrapper">
+        <input type="number" name="markup" value="<?php echo esc_attr( $markup ); ?>" />
     </div>
 </div>
