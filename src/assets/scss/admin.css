@@ -101,7 +101,6 @@ div.ui-toggle label:hover, div.ui-toggle label > div:hover {
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 14px;
-  cursor: pointer;
 }
 .input-wrapper input:focus {
   outline: none;
@@ -228,4 +227,16 @@ div.ui-toggle label:hover, div.ui-toggle label > div:hover {
   font-weight: 500;
   color: black;
   text-transform: capitalize;
+  width: 20%;
+}
+@media screen and (max-width: 767px) {
+  .aiob-input-group .heading {
+    width: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .aiob-input-group {
+    flex-direction: column;
+    align-items: start;
+  }
 }/*# sourceMappingURL=admin.css.map */

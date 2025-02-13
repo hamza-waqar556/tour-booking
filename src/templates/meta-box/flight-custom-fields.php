@@ -7,7 +7,6 @@ $from_airport      = get_post_meta( $post->ID, '_from_airport', true );
 $to_airport      = get_post_meta( $post->ID, '_to_airport', true );
 $departure_time  = get_post_meta( $post->ID, '_departure_time', true );
 $arrival_time       = get_post_meta( $post->ID, '_arrival_time', true );
-$user_email      = get_post_meta( $post->ID, '_user_email', true );
 $adult_seat_price  = get_post_meta( $post->ID, '_adult_seat_price', true );
 $child_seat_price  = get_post_meta( $post->ID, '_child_seat_price', true );
 $infant_seat_price  = get_post_meta( $post->ID, '_infant_seat_price', true );
@@ -17,19 +16,9 @@ $cabin_baggage  = get_post_meta( $post->ID, '_cabin_baggage', true );
 $flight_type  = get_post_meta( $post->ID, '_flight_type', true );
 $flight_currency  = get_post_meta( $post->ID, '_flight_currency', true );
 
-// Get all users
-$users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
-
 // Nonce for security
 wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
 
-$user_emails = [];
-
-foreach ($users as $user) {
-    $user_emails[] = $user->user_email;
-}
-
-$email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 ?>
 
@@ -142,12 +131,5 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     <div id="flight-currency" data-options='["PKR", "USD", "EUR"]'></div>
     <input type="hidden" name="flight_currency" id="flight-currency-input" value="<?php echo esc_attr( $flight_currency ); ?>">
 </div>
-
-<div class="aiob-input-group">
-    <div class="heading">User Email:</div>
-    <div id="user-email" data-options="<?= $email_json; ?>"></div>
-    <input type="hidden" name="user_email" id="user-email-input" value="<?php echo esc_attr( $user_email ); ?>">
-</div>
-
 
 
