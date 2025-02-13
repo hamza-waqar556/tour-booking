@@ -1,1 +1,115 @@
-/*# sourceMappingURL=public.css.map */
+body .heading-wrapper {
+  text-align: center;
+  margin-bottom: 30px;
+}
+body .heading-wrapper .icon-wrapper {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+@media (max-width: 767px) {
+  body .border-md {
+    border: none !important;
+  }
+}
+body .select2 {
+  width: 100% !important;
+}
+body .select2 .select2-selection {
+  border: 1px solid #dee2e6 !important;
+  padding: 0.375rem 0.75rem !important;
+  height: auto !important;
+  border-radius: 0.375rem !important;
+}
+body .select2 .select2-selection .select2-selection__rendered {
+  line-height: 24px !important;
+}
+body .select2 .select2-selection .select2-selection__rendered .select2-selection__placeholder {
+  color: #212529 !important;
+}
+body .select2 .select2-selection .select2-selection__arrow {
+  top: 6px !important;
+}
+body .ui-datepicker .ui-datepicker-header {
+  background: transparent !important;
+  border: none !important;
+}
+body .ui-datepicker .ui-datepicker-calendar .ui-state-default {
+  background: transparent !important;
+  border-color: transparent !important;
+  text-align: center !important;
+  border-radius: 4px;
+}
+body .ui-datepicker .ui-datepicker-calendar .ui-state-highlight {
+  color: #0058e6 !important;
+  border: 2px solid #0058e6 !important;
+  background: transparent !important;
+}
+body .ui-datepicker .ui-datepicker-calendar .ui-state-active {
+  border: 2px solid #0058e6 !important;
+  color: white !important;
+  background: #0058e6 !important;
+}
+body .slider-container .ui-slider .ui-slider-range {
+  background: #0d6efd !important;
+}
+body .slider-container .ui-slider .ui-slider-handle {
+  background: white !important;
+  border-radius: 50% !important;
+  top: -0.4em !important;
+}
+body .slider-container .ui-slider-horizontal {
+  height: 0.5em !important;
+}
+body #pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+body #pagination .pagination-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
+  color: #333;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+body #pagination .pagination-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+body #pagination .pagination-btn.prev, body #pagination .pagination-btn.next {
+  font-weight: bold;
+}
+body #pagination .pagination-btn:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+body #pagination .page-buttons {
+  display: flex;
+  gap: 5px;
+}
+body #pagination .page-buttons .ellipsis {
+  padding: 0 8px;
+  font-size: 14px;
+  color: #6c757d;
+}
+body .slick-prev::before {
+  color: black;
+}
+body .slick-next::before {
+  color: black;
+}
+@media (max-width: 767px) {
+  body #pagination .pagination-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  body #pagination .ellipsis {
+    font-size: 12px;
+  }
+}/*# sourceMappingURL=public.css.map */
