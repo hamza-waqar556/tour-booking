@@ -26,7 +26,6 @@ class ShortCodes extends BaseController
                 return ob_get_clean();
             } );
 
-            // \var_dump( $shortcodeName );
         }
 
     }
