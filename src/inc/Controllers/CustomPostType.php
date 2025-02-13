@@ -30,7 +30,7 @@ class CustomPostType extends BaseController
         $enabled_cpts = get_option( 'aiob_settings', [  ] );
 
         $cpts = [
-            'hotels_cpt'  => [
+            'hotels_cpt'      => [
                 'post_type'             => 'hotel',
                 'name'                  => 'Hotels',
                 'singular_name'         => 'Hotel',
@@ -77,7 +77,7 @@ class CustomPostType extends BaseController
                 'capability_type'       => 'post',
                 'menu_icon'             => 'dashicons-building',
              ],
-            'flights_cpt' => [
+            'flights_cpt'     => [
                 'post_type'             => 'flight',
                 'name'                  => 'Flights',
                 'singular_name'         => 'Flight',
@@ -124,7 +124,7 @@ class CustomPostType extends BaseController
                 'capability_type'       => 'post',
                 'menu_icon'             => 'dashicons-airplane',
              ],
-            'tours_cpt'   => [
+            'tours_cpt'       => [
                 'post_type'             => 'tour',
                 'name'                  => 'Tours',
                 'singular_name'         => 'Tour',
@@ -171,7 +171,7 @@ class CustomPostType extends BaseController
                 'capability_type'       => 'post',
                 'menu_icon'             => 'dashicons-universal-access-alt',
              ],
-             'car_booking_cpt'   => [
+            'car_booking_cpt' => [
                 'post_type'             => 'car_booking',
                 'name'                  => 'Car Bookings',
                 'singular_name'         => 'Car Booking',
@@ -217,8 +217,8 @@ class CustomPostType extends BaseController
                 'publicly_queryable'    => true,
                 'capability_type'       => 'post',
                 'menu_icon'             => 'dashicons-car',
-             ],            
-            'add_api_cpt' => [
+             ],
+            'add_api_cpt'     => [
                 'post_type'             => 'api',
                 'name'                  => 'APIs',
                 'singular_name'         => 'API',
@@ -249,8 +249,8 @@ class CustomPostType extends BaseController
                 'filter_items_list'     => 'Filter APIs List',
                 'label'                 => 'API',
                 'description'           => 'APIs Custom Post Type',
-                'supports'              => [ 'title', 'editor', 'thumbnail', 'excerpt' ],
-                'taxonomies'            => [ 'category' ],
+                'supports'              => [ 'title' ],
+                'taxonomies'            => [  ],
                 'hierarchical'          => false,
                 'public'                => true,
                 'show_ui'               => true,

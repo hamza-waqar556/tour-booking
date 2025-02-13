@@ -19,7 +19,9 @@ final class Init
             Base\SettingsLinks::class,
             Controllers\CustomPostType::class,
             Controllers\CreateMetaBoxes::class,
+            Controllers\ShortCodes::class,
             Pages\FlightAirports::class,
+            Data\GetApiCredentials::class,
          ];
     }
 
