@@ -6,7 +6,6 @@ $featured        = get_post_meta( $post->ID, '_featured', true );
 $check_in        = get_post_meta( $post->ID, '_check_in', true );
 $check_out       = get_post_meta( $post->ID, '_check_out', true );
 $hotel_currency        = get_post_meta( $post->ID, '_hotel_currency', true );
-$user_email      = get_post_meta( $post->ID, '_user_email', true );
 $refundable      = get_post_meta( $post->ID, '_refundable', true );
 $star          = get_post_meta( $post->ID, '_star', true );
 $rating          = get_post_meta( $post->ID, '_rating', true );
@@ -19,20 +18,11 @@ $hotel_email     = get_post_meta( $post->ID, '_hotel_email', true );
 $hotel_website     = get_post_meta( $post->ID, '_hotel_website', true );
 $hotel_phone     = get_post_meta( $post->ID, '_hotel_phone', true );
 
-// Get all users
-$users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
+
 
 // Nonce for security
 wp_nonce_field( 'hotel_fields_nonce_action', 'hotel_fields_nonce' );
 
-
-$user_emails = [];
-
-foreach ($users as $user) {
-    $user_emails[] = $user->user_email;
-}
-
-$email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 ?>
 
@@ -86,13 +76,6 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
     <div class="heading">currency:</div>
     <div id="hotel-currency" data-options='["PKR", "USD", "EUR"]'></div>
     <input type="hidden" name="hotel_currency" id="hotel-currency-input" value="<?php echo esc_attr( $hotel_currency ); ?>">
-</div>
-
-
-<div class="aiob-input-group">
-    <div class="heading">User Email:</div>
-    <div id="user-email" data-options="<?= $email_json; ?>"></div>
-    <input type="hidden" name="user_email" id="user-email-input" value="<?php echo esc_attr( $user_email ); ?>">
 </div>
 
 <div class="aiob-input-group">

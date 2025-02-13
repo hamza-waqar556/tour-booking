@@ -3,26 +3,17 @@
 // Get saved values
 $tour_currency        = get_post_meta( $post->ID, '_tour_currency', true );
 $refundable     = get_post_meta( $post->ID, '_refundable', true );
-$user_email      = get_post_meta( $post->ID, '_user_email', true );
 $star          = get_post_meta( $post->ID, '_star', true );
 $rating          = get_post_meta( $post->ID, '_rating', true );
+$tour_inclusions          = get_post_meta( $post->ID, '_tour_inclusions', true );
+$tour_exclusions          = get_post_meta( $post->ID, '_tour_exclusions', true );
 $adult_tour_price     = get_post_meta( $post->ID, '_adult_tour_price', true );
-$child_tour_price     = get_post_meta( $post->ID, '_achild_tour_price', true );
+$child_tour_price     = get_post_meta( $post->ID, '_child_tour_price', true );
+$tour_location     = get_post_meta( $post->ID, '_tour_location', true );
 
-// Get all users
-$users = get_users( [ 'fields' => [ 'ID', 'user_email' ] ] );
 
 // Nonce for security
 wp_nonce_field( 'tour_fields_nonce_action', 'tour_fields_nonce' );
-
-
-$user_emails = [];
-
-foreach ($users as $user) {
-    $user_emails[] = $user->user_email;
-}
-
-$email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 ?>
 
@@ -70,14 +61,15 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 <div class="aiob-input-group">
     <div class="heading">tour inclusions:</div>
-    <div id="tour-currency" data-options='["PKR", "USD", "EUR"]'></div>
-    <input type="hidden" name="tour_currency" id="tour-currency-input" value="<?php echo esc_attr( $tour_currency ); ?>">
+    <div id="tour-inclusions" data-options='["breakfast", "lunch", "room"]'></div>
+    <input type="hidden" name="tour_inclusions" id="tour-inclusions-input" value="<?php echo esc_attr( $tour_inclusions ); ?>">
 </div>
 
 
 <div class="aiob-input-group">
     <div class="heading">tour exclusions:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="tour-exclusions" data-options='["breakfast", "lunch", "room"]'></div>
+    <input type="hidden" name="tour_exclusions" id="tour-exclusions-input" value="<?php echo esc_attr( $tour_exclusions ); ?>">
 </div>
 
 <div class="aiob-input-group">
@@ -97,5 +89,7 @@ $email_json = htmlspecialchars(json_encode($user_emails), ENT_QUOTES, 'UTF-8');
 
 <div class="aiob-input-group">
     <div class="heading">location:</div>
-    <div  data-options="<?= $email_json; ?>"></div>
+    <div id="tour-location" data-options='["Faisalabad", "lahore", "Islamabad"]'></div>
+    <input type="hidden" name="tour_location" id="tour-location-input" value="<?php echo esc_attr( $tour_location ); ?>">
 </div>
+
