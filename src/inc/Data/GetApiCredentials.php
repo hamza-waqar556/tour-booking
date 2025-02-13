@@ -15,6 +15,8 @@ class GetApiCredentials
     {
         $this->getApiMetaData();
         $this->categorizeAPIs();
+
+        return $this;
     }
 
     public function getApiMetaData()
@@ -65,5 +67,21 @@ class GetApiCredentials
         // update_option('aiob_api_meta', $api_meta_data);
 
         $this->api_data = $categorized;
+    }
+
+    public function getApiCreds( $category, $name )
+    {
+        // Ensure the api_data property exists and is an array
+        if ( ! isset( $this->api_data[ $category ] ) || ! is_array( $this->api_data[ $category ] ) ) {
+            return null; // Return null if the category is not found
+        }
+
+        // Check if the requested API exists in the category
+        if ( ! isset( $this->api_data[ $category ][ $name ] ) ) {
+            return null; // Return null if the specific API name is not found
+        }
+
+        // Return the API credentials array
+        return $this->api_data[ $category ][ $name ];
     }
 }

@@ -21,6 +21,7 @@ final class Init
             Controllers\CreateMetaBoxes::class,
             Controllers\ShortCodes::class,
             Pages\FlightAirports::class,
+            Data\GetAmendusFlights::class,
          ];
     }
 
