@@ -1,0 +1,155 @@
+body {
+  .heading-wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .icon-wrapper {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+  }
+
+  .border-md {
+    @media (max-width: 767px) {
+      border: none !important;
+    }
+  }
+
+  .select2 {
+    width: 100% !important;
+
+    .select2-selection {
+      border: 1px solid #dee2e6 !important;
+      padding: 0.375rem 0.75rem !important;
+      height: auto !important;
+      border-radius: 0.375rem !important;
+
+      .select2-selection__rendered {
+        line-height: 24px !important;
+
+        .select2-selection__placeholder {
+          color: #212529 !important;
+        }
+      }
+      .select2-selection__arrow {
+        top: 6px !important;
+      }
+    }
+  }
+
+  // date picker
+  .ui-datepicker {
+    .ui-datepicker-header {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    .ui-datepicker-calendar {
+      .ui-state-default {
+        background: transparent !important;
+        border-color: transparent !important;
+        text-align: center !important;
+        border-radius: 4px;
+      }
+      .ui-state-highlight {
+        color: #0058e6 !important;
+        border: 2px solid #0058e6 !important;
+        background: transparent !important;
+      }
+      .ui-state-active {
+        border: 2px solid #0058e6 !important;
+        color: white !important;
+        background: #0058e6 !important;
+      }
+    }
+  }
+
+  // price filter slider
+  .slider-container {
+    .ui-slider {
+      .ui-slider-range {
+        background: #0d6efd !important;
+      }
+      .ui-slider-handle {
+        background: white !important;
+        border-radius: 50% !important;
+        top: -0.4em !important;
+      }
+    }
+    .ui-slider-horizontal {
+      height: 0.5em !important;
+    }
+  }
+
+  // pagenations
+  #pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+
+    .pagination-btn {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      background-color: #f8f8f8;
+      color: #333;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+
+      &.active {
+        background-color: #007bff;
+        color: white;
+      }
+
+      &.prev,
+      &.next {
+        font-weight: bold;
+      }
+
+      &:disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+        cursor: not-allowed;
+      }
+    }
+
+    .page-buttons {
+      display: flex;
+      gap: 5px;
+
+      .ellipsis {
+        padding: 0 8px;
+        font-size: 14px;
+        color: #6c757d;
+      }
+    }
+  }
+
+  // slick slider
+  .slick-prev {
+    &::before {
+      color: black;
+    }
+  }
+  .slick-next {
+    &::before {
+      color: black;
+    }
+  }
+
+  @media (max-width: 767px) {
+    #pagination {
+      .pagination-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      .ellipsis {
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -12,65 +12,56 @@ class Enqueue extends BaseController
 {
     public function register()
     {
-        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueueAdmin' ] );
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueuePublic' ] );
     }
 
-    public function enqueue()
+    public function enqueueAdmin()
     {
-        // enqueue all our scripts
 
-        // CSS
-        wp_enqueue_style( 'admin', $this->plugin_url . 'src/assets/scss/admin.css', [  ], '1.0.0' );
+        wp_enqueue_style( 'admin', $this->plugin_url . 'src/assets/admin/scss/admin.min.css', [  ], '1.0.0' );
 
-        // JS
-        wp_enqueue_script( 'admin', $this->plugin_url . 'src/assets/js/admin.js', [ 'jquery' ], '1.0.0', false );
-       
+        wp_enqueue_script( 'admin', $this->plugin_url . 'src/assets/admin/js/admin.min.js', [ 'jquery' ], '1.0.0', false );
 
-        wp_enqueue_script( 'aiob-searchable-select', $this->plugin_url . 'src/assets/js/modules/aiob-searchable-select.js', [ 'jquery' ], '1.0.0', false );
-        wp_enqueue_script( 'aiob-multi-select', $this->plugin_url . 'src/assets/js/modules/aiob-multi-select.js', [ 'jquery' ], '1.0.0', false );
     }
 
     public function enqueuePublic()
     {
-        // enqueue all our scripts
 
-        // CSS
-        wp_enqueue_style( 'public', $this->plugin_url . 'src/assets/scss/public.css', [  ], '1.0.0', false );
+        // Custom Files
+        wp_enqueue_style( 'main', $this->plugin_url . 'src/assets/public/scss/main.min.css', [  ], '1.0.0', false );
+        wp_enqueue_script( 'main', $this->plugin_url . 'src/assets/public/js/main.min.js', [ 'jquery' ], '1.0.0', false );
+        // Define jQuery ($) var as global
+        wp_add_inline_script( 'jquery', 'var $ = jQuery;' );
 
-        // libs
-        // bootstrap css
-        wp_enqueue_style( 'bootstrap', $this->plugin_url . 'src/assets/libs/css/bootstrap.min.css', [], '5.3', false );
-        
-        // font awesome css
-        wp_enqueue_style( 'font-awesome', $this->plugin_url . 'src/assets/libs/css/font-awesome.css', [], '6.5.1' );
+        // -> Libraries
 
-        // date picker css
-        wp_enqueue_style( 'jquery-ui', $this->plugin_url . 'src/assets/libs/css/jquery-ui.min.css', [], '1.13.2' );
+        // Font Awesome
+        wp_enqueue_style( 'font-awesome', $this->plugin_url . 'src/assets/lib/font-awesome/font-awesome.css', [  ], '1.0.0', false );
+        wp_enqueue_script( 'font-awesome', $this->plugin_url . 'src/assets/lib/font-awesome/font-awesome.js', [ 'jquery' ], '1.0.0', false );
 
-        // select 2 css
-        wp_enqueue_style( 'select2', $this->plugin_url . 'src/assets/libs/css/select2.min.css', [], '4.1.0' );
+        // Bootstrap
+        wp_enqueue_style( 'bootstrap', $this->plugin_url . 'src/assets/lib/bootstrap/bootstrap.css', [  ], '1.0.0', false );
+        wp_enqueue_script( 'bootstrap', $this->plugin_url . 'src/assets/lib/bootstrap/bootstrap.js', [ 'jquery' ], '1.0.0', false );
 
-        // JS
-        wp_enqueue_script( 'public', $this->plugin_url . 'src/assets/js/public.js', [ 'jquery' ], '1.0.0', false );
+        // jQuery-ui
+        wp_enqueue_style( 'jquery-ui', $this->plugin_url . 'src/assets/lib/jquery-ui/jquery-ui.css', [  ], '1.0.0', false );
+        wp_enqueue_script( 'jquery-ui', $this->plugin_url . 'src/assets/lib/jquery-ui/jquery-ui.js', [ 'jquery' ], '1.0.0', false );
 
-        // libs
-        // bootstrap js
-        wp_enqueue_script( 'bootstrap', $this->plugin_url . 'src/assets/libs/js/bootstrap.bundle.min.js', [ 'jquery' ], '5.3', false );
-        
-        // font awesome js
-        wp_enqueue_script( 'font-awesome', $this->plugin_url . 'src/assets/libs/js/font-awesome.js', [ 'jquery' ], '6.5.1' );
-        
-        // date picker js
-        wp_enqueue_script( 'jquery-ui', $this->plugin_url . 'src/assets/libs/js/jquery-ui.min.js', [ 'jquery' ], '4.1.0' );
-       
-        // select 2 js
-        wp_enqueue_script( 'select2', $this->plugin_url . 'src/assets/libs/js/select2.min.js', [ 'jquery' ], '1.13.2' );
+        // select2
+        wp_enqueue_style( 'select-2', $this->plugin_url . 'src/assets/lib/select2/select2.css', [  ], '1.0.0', false );
+        wp_enqueue_script( 'select-2', $this->plugin_url . 'src/assets/lib/select2/select2.js', [ 'jquery' ], '1.0.0', false );
 
-        
-        // shortcodes js 
-        // flights js
-        wp_enqueue_script( 'flights', $this->plugin_url . 'src/assets/js/shortcodes-js/flights.js', [ 'jquery' ], '1.0.0', false );
+        // -> Set Ajax Url
+
+        $rest_routes = [
+            'search_flights' => esc_url( rest_url( 'aiob/v1/search-flights' ) ),
+         ];
+
+        wp_localize_script( 'main', 'AIOB', [
+            'ajax_url' => $rest_routes,
+            'nonce'    => wp_create_nonce( 'wp_rest' ),
+         ] );
 
     }
 }

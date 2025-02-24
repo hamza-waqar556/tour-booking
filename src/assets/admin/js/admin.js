@@ -1,8 +1,11 @@
+import "../scss/admin.scss";
+console.log("Admin JS loaded");
+
 window.addEventListener("load", function () {
   // Store tabs variable
   var tabs = document.querySelectorAll("ul.nav-tabs > li");
 
-  for (i = 0; i < tabs.length; i++) {
+  for (let i = 0; i < tabs.length; i++) {
     tabs[i].addEventListener("click", switchTab);
   }
 
