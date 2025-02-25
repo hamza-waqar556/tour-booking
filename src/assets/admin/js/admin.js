@@ -1,6 +1,17 @@
 import "../scss/admin.scss";
+import SearchableSelect from "./modules/searchable-select.js";
+import AirportSearchableSelect from "./modules/airport-searchable-select.js";
+import AirlineSearchableSelect from "./modules/airline-searchable-select.js";
+import MultiSelect from "./modules/multi-select.js";
 console.log("Admin JS loaded");
 
+// $(document).ready(function () {
+//   $("[data-airlines]").each(function () {
+//     new AirlineSearchableSelect(this);
+//   });
+// });
+
+// Leave this for now
 window.addEventListener("load", function () {
   // Store tabs variable
   var tabs = document.querySelectorAll("ul.nav-tabs > li");

@@ -22,6 +22,23 @@ class Enqueue extends BaseController
         wp_enqueue_style( 'admin', $this->plugin_url . 'src/assets/admin/scss/admin.min.css', [  ], '1.0.0' );
 
         wp_enqueue_script( 'admin', $this->plugin_url . 'src/assets/admin/js/admin.min.js', [ 'jquery' ], '1.0.0', false );
+        // Define jQuery ($) var as global
+        wp_add_inline_script( 'jquery', 'var $ = jQuery;' );
+
+        $rest_routes = [
+
+         ];
+
+        $plugin = [
+            'path' => $this->plugin_path,
+            'url'  => $this->plugin_url,
+         ];
+
+        wp_localize_script( 'admin', 'AIOB', [
+            'ajax_url' => $rest_routes,
+            'plugin'   => $plugin,
+            'nonce'    => wp_create_nonce( 'wp_rest' ),
+         ] );
 
     }
 
@@ -58,8 +75,14 @@ class Enqueue extends BaseController
             'search_flights' => esc_url( rest_url( 'aiob/v1/search-flights' ) ),
          ];
 
+        $plugin = [
+            'path' => $this->plugin_path,
+            'url'  => $this->plugin_url,
+         ];
+
         wp_localize_script( 'main', 'AIOB', [
             'ajax_url' => $rest_routes,
+            'plugin'   => $plugin,
             'nonce'    => wp_create_nonce( 'wp_rest' ),
          ] );
 

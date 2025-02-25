@@ -1,29 +1,32 @@
 <?php
 // Get saved values
-$status          = get_post_meta( $post->ID, '_status', true );
-$refundable      = get_post_meta( $post->ID, '_refundable', true );
-$flight_airlines      = get_post_meta( $post->ID, '_flight_airlines', true );
+$status            = get_post_meta( $post->ID, '_status', true );
+$refundable        = get_post_meta( $post->ID, '_refundable', true );
+$flight_airlines   = get_post_meta( $post->ID, '_flight_airlines', true );
 $from_airport      = get_post_meta( $post->ID, '_from_airport', true );
-$to_airport      = get_post_meta( $post->ID, '_to_airport', true );
-$departure_time  = get_post_meta( $post->ID, '_departure_time', true );
-$arrival_time       = get_post_meta( $post->ID, '_arrival_time', true );
+$to_airport        = get_post_meta( $post->ID, '_to_airport', true );
+$departure_time    = get_post_meta( $post->ID, '_departure_time', true );
+$arrival_time      = get_post_meta( $post->ID, '_arrival_time', true );
 $adult_seat_price  = get_post_meta( $post->ID, '_adult_seat_price', true );
 $child_seat_price  = get_post_meta( $post->ID, '_child_seat_price', true );
-$infant_seat_price  = get_post_meta( $post->ID, '_infant_seat_price', true );
-$duration  = get_post_meta( $post->ID, '_duration', true );
-$baggage  = get_post_meta( $post->ID, '_baggage', true );
-$cabin_baggage  = get_post_meta( $post->ID, '_cabin_baggage', true );
-$flight_type  = get_post_meta( $post->ID, '_flight_type', true );
-$flight_currency  = get_post_meta( $post->ID, '_flight_currency', true );
+$infant_seat_price = get_post_meta( $post->ID, '_infant_seat_price', true );
+$duration          = get_post_meta( $post->ID, '_duration', true );
+$baggage           = get_post_meta( $post->ID, '_baggage', true );
+$cabin_baggage     = get_post_meta( $post->ID, '_cabin_baggage', true );
+$flight_type       = get_post_meta( $post->ID, '_flight_type', true );
+$flight_currency   = get_post_meta( $post->ID, '_flight_currency', true );
 
 // Nonce for security
 wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
 
-
 ?>
 
+
+<!-- <hr>
+<hr> -->
+
+
 <div class="aiob-input-group">
-    
     <div class="heading">Status:</div>
     <div class="ui-toggle">
         <input type="checkbox" id="flight-status" name="status" value="1" <?php checked( $status, 1 ); ?> />
@@ -43,22 +46,32 @@ wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
     </div>
 </div>
 
+<!-- Airlines | Select Search -->
 <div class="aiob-input-group">
     <div class="heading">Airlines:</div>
-    <div id="flight-airlines" data-options='["PK", "UK", "LHD"]'></div>
-    <input type="hidden" name="flight_airlines" id="flight-airlines-input" value="<?php echo esc_attr( $flight_airlines ); ?>">
+    <div id="airline-select" data-airlines data-file="airlines.json"></div>
+    <input type="hidden" id="airline-select-input" name="flight_airlines" value="<?php echo esc_attr( $flight_airlines ); ?>">
 </div>
 
+
+<!-- From Airport | Search Select -->
 <div class="aiob-input-group">
-    <div class="heading">from airport:</div>
-    <div id="from-airport" data-options='["PK", "UK", "LHD"]'></div>
-    <input type="hidden" name="from_airport" id="from-airport-input" value="<?php echo esc_attr( $from_airport ); ?>">
+  <div class="heading">From Airports:</div>
+  <div id="from-airport" data-airports data-file="airports.json" class="aiob-searchable-dropdown">
+    <input type="text">
+    <ul class="aiob-searchable-dropdown-list" style="display: none;"></ul>
+  </div>
+  <input type="hidden" name="from_airport" id="from-airport-input" value="<?php echo esc_attr( $from_airport ); ?>">
 </div>
 
+<!-- To Airport | Search Select -->
 <div class="aiob-input-group">
-    <div class="heading">to airport:</div>
-    <div id="to-airport" data-options='["PK", "UK", "LHD"]'></div>
-    <input type="hidden" name="to_airport" id="to-airport-input" value="<?php echo esc_attr( $to_airport ); ?>">
+  <div class="heading">To Airports:</div>
+  <div id="to-airport" data-airports data-file="airports.json" class="aiob-searchable-dropdown">
+    <input type="text">
+    <ul class="aiob-searchable-dropdown-list" style="display: none;"></ul>
+  </div>
+  <input type="hidden" name="to_airport" id="to-airport-input" value="<?php echo esc_attr( $to_airport ); ?>">
 </div>
 
 
@@ -86,7 +99,7 @@ wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
 <div class="aiob-input-group">
     <div class="heading">Duration:</div>
     <div class="input-wrapper">
-        <input type="number" name="duration" value="<?php echo esc_attr( $duration ); ?>" />
+        <input type="number" name="duration" value="<?php echo esc_attr( $duration ); ?>" placeholder="In minuets"/>
     </div>
 </div>
 
