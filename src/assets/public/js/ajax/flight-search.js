@@ -24,7 +24,7 @@ class FlightSearch {
 
   fetchFlights(formData) {
     $.ajax({
-      url: AIOB.ajax_url.search_flights,
+      url: AIOB.routes.search_flights,
       method: "POST",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("X-WP-Nonce", AIOB.nonce);

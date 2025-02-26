@@ -1,0 +1,85 @@
+// airlineSearch.module.scss
+
+// Variables
+$max-width: 400px;
+$primary-color: #3498db;
+$border-color: #ccc;
+$input-padding: 8px;
+$input-bg: #fff;
+$input-text-color: #333;
+$font-family: "Arial", sans-serif;
+$dropdown-bg: #fff;
+$dropdown-item-hover-bg: #f5f5f5;
+
+// Mixin for flex centering
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Container styles
+.airline-search-container {
+  max-width: $max-width;
+  margin: 0 auto;
+  font-family: $font-family;
+  position: relative;
+
+  .airline-search-input {
+    width: 100%;
+    padding: $input-padding;
+    box-sizing: border-box;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $input-bg;
+    color: $input-text-color;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  .airline-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $dropdown-bg;
+    max-height: 300px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+
+    li {
+      padding: $input-padding;
+      border-bottom: 1px solid lighten($border-color, 20%);
+      @include flex-center(flex-start, center);
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: $dropdown-item-hover-bg;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 1rem;
+        color: $input-text-color;
+      }
+    }
+  }
+}

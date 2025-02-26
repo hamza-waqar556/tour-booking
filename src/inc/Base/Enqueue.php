@@ -35,7 +35,7 @@ class Enqueue extends BaseController
          ];
 
         wp_localize_script( 'admin', 'AIOB', [
-            'ajax_url' => $rest_routes,
+            'routes' => $rest_routes,
             'plugin'   => $plugin,
             'nonce'    => wp_create_nonce( 'wp_rest' ),
          ] );
@@ -78,10 +78,11 @@ class Enqueue extends BaseController
         $plugin = [
             'path' => $this->plugin_path,
             'url'  => $this->plugin_url,
+            'ajax_url' => $this->ajax_url,
          ];
 
         wp_localize_script( 'main', 'AIOB', [
-            'ajax_url' => $rest_routes,
+            'routes' => $rest_routes,
             'plugin'   => $plugin,
             'nonce'    => wp_create_nonce( 'wp_rest' ),
          ] );
