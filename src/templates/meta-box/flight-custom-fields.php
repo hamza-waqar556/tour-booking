@@ -21,7 +21,6 @@ wp_nonce_field( 'flight_fields_nonce_action', 'flight_fields_nonce' );
 
 ?>
 
-
 <!-- <hr>
 <hr> -->
 

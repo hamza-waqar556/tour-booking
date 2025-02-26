@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc\Controllers;
+namespace Inc\Routes;
 
 use \WP_REST_Controller;
 use \WP_REST_Request;

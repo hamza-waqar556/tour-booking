@@ -10,7 +10,7 @@ class Activate
     /**
      * Plugin activation routine.
      *
-     * Flushes rewrite rules, sets default options, and processes CSV imports.
+     * Flushes rewrite rules, sets default options, and processes JSON imports.
      *
      * @return void
      */
@@ -21,33 +21,36 @@ class Activate
         add_option( 'aiob_settings', [  ] );
         add_option( 'aiob_cpts', [  ] );
 
-        // Process CSV imports on activation.
-        self::processCsvImports();
+        // Process JSON imports on activation.
+        self::processJsonImports();
     }
 
     /**
-     * Processes the CSV files: creates tables and imports data if the table is empty.
+     * Processes the JSON files: creates tables and imports data if the table is empty.
+     *
+     * Files for airlines and airports are located in the same data directory
+     * but have a .json extension now.
      *
      * @return void
      */
-    private static function processCsvImports()
+    private static function processJsonImports()
     {
         global $wpdb;
         // Adjust the path as needed.
         $pluginPath = plugin_dir_path( __FILE__ ) . '../../assets/data/';
 
-        // Map CSV files to table slugs.
-        $csvFiles = [
-            'airlines' => $pluginPath . 'airlines.csv',
-            'airports' => $pluginPath . 'airports.csv',
+        // Map JSON files to table slugs.
+        $jsonFiles = [
+            'airlines' => $pluginPath . 'airlines.json',
+            'airports' => $pluginPath . 'airports.json',
          ];
 
-        // Process each CSV file.
-        foreach ( $csvFiles as $tableSlug => $csvPath ) {
+        // Process each JSON file.
+        foreach ( $jsonFiles as $tableSlug => $jsonPath ) {
             $tableName = $wpdb->prefix . $tableSlug;
 
-            // Create the table based on CSV header.
-            if ( ! self::createTable( $tableName, $csvPath ) ) {
+            // Create the table based on JSON structure.
+            if ( ! self::createTable( $tableName, $jsonPath, $tableSlug ) ) {
                 error_log( "Failed to create table: {$tableName}" );
                 continue;
             }
@@ -55,49 +58,51 @@ class Activate
             // Import data only if the table is empty.
             $count = $wpdb->get_var( "SELECT COUNT(*) FROM {$tableName}" );
             if ( $count > 0 ) {
-                error_log( "Table {$tableName} already contains data. Skipping CSV import." );
+                error_log( "Table {$tableName} already contains data. Skipping JSON import." );
                 continue;
             }
 
-            self::importCsv( $csvPath, $tableName );
+            self::importJson( $jsonPath, $tableName, $tableSlug );
         }
     }
 
     /**
-     * Creates a database table based on the header row of the CSV.
+     * Creates a database table based on the keys of the first JSON object.
      *
-     * Skips any CSV column named "id" to avoid conflicts with the auto-increment primary key.
+     * For the airlines table, it adds an extra "code" column that stores the JSON "id" value.
+     * Skips any JSON key named "id" to avoid conflicts with the auto-increment primary key.
      *
      * @param string $tableName The full table name (with prefix).
-     * @param string $csvPath   Path to the CSV file.
+     * @param string $jsonPath  Path to the JSON file.
+     * @param string $tableSlug Table slug (e.g., airlines, airports).
      *
      * @return bool True if table creation succeeded; false otherwise.
      */
-    private static function createTable( $tableName, $csvPath )
+    private static function createTable( $tableName, $jsonPath, $tableSlug = '' )
     {
         global $wpdb;
 
-        if ( ! file_exists( $csvPath ) || ! is_readable( $csvPath ) ) {
-            error_log( "CSV file {$csvPath} not found or not readable." );
+        if ( ! file_exists( $jsonPath ) || ! is_readable( $jsonPath ) ) {
+            error_log( "JSON file {$jsonPath} not found or not readable." );
             return false;
         }
 
-        $file = fopen( $csvPath, 'r' );
-        if ( ! $file ) {
-            error_log( "Failed to open CSV file: {$csvPath}" );
+        $jsonContent = file_get_contents( $jsonPath );
+        if ( false === $jsonContent ) {
+            error_log( "Failed to read JSON file: {$jsonPath}" );
             return false;
         }
 
-        // Read the CSV header with an explicit escape parameter.
-        $columns = fgetcsv( $file, 0, ',', '"', '\\' );
-        fclose( $file );
-
-        if ( ! $columns ) {
-            error_log( "Empty CSV or unable to read columns from: {$csvPath}" );
+        $data = json_decode( $jsonContent, true );
+        if ( ! is_array( $data ) || empty( $data ) ) {
+            error_log( "Empty JSON or unable to decode data from: {$jsonPath}" );
             return false;
         }
 
-        // Prepare SQL columns (skip CSV "id" column).
+        // Use the keys from the first object to build the table structure.
+        $columns = array_keys( $data[ 0 ] );
+
+        // Prepare SQL columns, skipping the JSON "id" key.
         $sqlColumns = [  ];
         foreach ( $columns as $column ) {
             $column = sanitize_key( $column );
@@ -105,6 +110,12 @@ class Activate
                 continue;
             }
             $sqlColumns[  ] = "`{$column}` TEXT";
+        }
+
+        // For the airlines table, add an extra "code" column that stores the JSON "id" value.
+        if ( 'airlines' === $tableSlug ) {
+            // Prepend the "code" column so it appears right after the primary key.
+            array_unshift( $sqlColumns, "`code` TEXT" );
         }
 
         // Build the CREATE TABLE SQL statement.
@@ -122,58 +133,43 @@ class Activate
     }
 
     /**
-     * Imports data from a CSV file into a given table.
+     * Imports data from a JSON file into a given table.
      *
-     * Reads the CSV header to map column names and then imports each row,
-     * ensuring that any CSV 'id' field is removed.
+     * For the airlines table, the JSON "id" value is stored in the "code" column,
+     * and the original "id" field is removed to allow auto-increment primary key.
      *
-     * @param string $csvPath   Path to the CSV file.
+     * @param string $jsonPath  Path to the JSON file.
      * @param string $tableName Full table name (with prefix) to insert data into.
+     * @param string $tableSlug Table slug (e.g., airlines, airports).
      *
      * @return void
      */
-    private static function importCsv( $csvPath, $tableName )
+    private static function importJson( $jsonPath, $tableName, $tableSlug = '' )
     {
         global $wpdb;
         // Increase the maximum execution time for large files.
         set_time_limit( 0 );
 
-        $file = fopen( $csvPath, 'r' );
-        if ( ! $file ) {
-            error_log( "Failed to open CSV file: {$csvPath}" );
+        $jsonContent = file_get_contents( $jsonPath );
+        if ( false === $jsonContent ) {
+            error_log( "Failed to read JSON file: {$jsonPath}" );
             return;
         }
 
-        // Read header row.
-        $columns = fgetcsv( $file, 0, ',', '"', '\\' );
-        if ( ! $columns ) {
-            error_log( "Empty CSV or unable to read columns from: {$csvPath}" );
-            fclose( $file );
+        $data = json_decode( $jsonContent, true );
+        if ( ! is_array( $data ) || empty( $data ) ) {
+            error_log( "Empty JSON or unable to decode data from: {$jsonPath}" );
             return;
         }
 
-        $data = [  ];
-        while ( ( $row = fgetcsv( $file, 0, ',', '"', '\\' ) ) !== false ) {
-            // Skip completely empty rows.
-            if ( ! array_filter( $row ) ) {
-                continue;
-            }
-
-            // Check that the row has the expected number of columns.
-            if ( count( $row ) != count( $columns ) ) {
-                error_log( "Skipping row due to column count mismatch in {$csvPath}" );
-                continue;
-            }
-
-            $data[  ] = array_combine( $columns, $row );
-        }
-        fclose( $file );
-
-        // Insert each row into the database, removing any CSV 'id' field.
+        // Insert each record into the database.
         foreach ( $data as $row ) {
-            if ( isset( $row[ 'id' ] ) ) {
+            // For the airlines table, move the JSON "id" value into the "code" column.
+            if ( 'airlines' === $tableSlug && isset( $row[ 'id' ] ) ) {
+                $row[ 'code' ] = $row[ 'id' ];
                 unset( $row[ 'id' ] );
             }
+
             $wpdb->insert( $tableName, $row );
         }
     }

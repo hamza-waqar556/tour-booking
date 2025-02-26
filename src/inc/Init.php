@@ -21,7 +21,8 @@ final class Init
             Controllers\CreateMetaBoxes::class,
             Controllers\ShortCodes::class,
             Pages\FlightAirports::class,
-            Controllers\FlightSearch::class,
+            Routes\FlightSearch::class,
+            Controllers\AirlinesSearch::class,
          ];
     }
 
