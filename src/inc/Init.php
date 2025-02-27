@@ -23,6 +23,7 @@ final class Init
             Pages\FlightAirports::class,
             Routes\FlightSearch::class,
             Controllers\AirlinesSearch::class,
+            Controllers\AirportsSearch::class,
          ];
     }
 

@@ -1,0 +1,123 @@
+// airportSearch.module.scss
+
+// Variables
+$max-width: 400px;
+$border-color: #ccc;
+$input-padding: 8px;
+$input-bg: #fff;
+$input-text-color: #333;
+$font-family: "Arial", sans-serif;
+$dropdown-bg: #fff;
+$dropdown-item-hover-bg: #f5f5f5;
+
+// Mixin for flex centering
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Container Styles
+.airport-search-container {
+  max-width: $max-width;
+  position: relative;
+  font-family: $font-family;
+
+  .airport-search-input-wrapper {
+    position: relative;
+
+    .airport-code-box-input {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 32px;
+      background: #f0f0f0;
+      @include flex-center();
+      border-radius: 4px;
+
+      span {
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+    }
+
+    .airport-search-input {
+      width: 100%;
+      padding: $input-padding;
+      padding-left: 50px; // Leave space for the code box.
+      box-sizing: border-box;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: $input-bg;
+      color: $input-text-color;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: darken($border-color, 15%);
+        outline: none;
+      }
+    }
+  }
+
+  .airport-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $dropdown-bg;
+    max-height: 300px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+
+    li {
+      padding: $input-padding;
+      border-bottom: 1px solid lighten($border-color, 20%);
+      @include flex-center(flex-start, center);
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: $dropdown-item-hover-bg;
+      }
+
+      .airport-code-box {
+        width: 50px;
+        height: 50px;
+        background: #f0f0f0;
+        @include flex-center();
+        margin-right: 10px;
+        border-radius: 4px;
+
+        span {
+          font-weight: bold;
+          font-size: 1rem;
+        }
+      }
+
+      .airport-info {
+        flex: 1;
+
+        .airport-location {
+          font-size: 0.9rem;
+          color: #555;
+        }
+
+        .airport-name {
+          font-size: 1rem;
+          font-weight: bold;
+          color: #333;
+        }
+      }
+    }
+  }
+}
