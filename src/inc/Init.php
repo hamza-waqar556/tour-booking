@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package TourBooking
  */
@@ -24,7 +25,7 @@ final class Init
             Routes\FlightSearch::class,
             Controllers\AirlinesSearch::class,
             Controllers\AirportsSearch::class,
-         ];
+        ];
     }
 
     /**
@@ -34,13 +35,14 @@ final class Init
     public static function registerServices()
     {
 
-        foreach ( self::getServices() as $class ) {
-            $service = self::instantiate( $class );
-            if ( method_exists( $service, 'register' ) ) {
+        foreach (self::getServices() as $class)
+        {
+            $service = self::instantiate($class);
+            if (method_exists($service, 'register'))
+            {
                 $service->register();
             }
         }
-
     }
 
     /**
@@ -48,7 +50,7 @@ final class Init
      * @param class $class      class from the services array
      * @return class instance   new instance of the class
      */
-    private static function instantiate( $class )
+    private static function instantiate($class)
     {
         $service = new $class();
 
