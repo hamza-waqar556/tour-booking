@@ -13,12 +13,11 @@
     <button type="submit">Search Flights</button>
 </form>
 
-<div id="search-results"></div> -->
+-->
 
 
-
-
-
+<!-- Rest Route : search_flights -->
+<!-- <section id="flightsPage"> -->
 <div class="container">
     <!-- this is page heading wrapper -->
     <div class="heading-wrapper">
@@ -31,36 +30,23 @@
     </div>
 
     <!-- Form for search  flights -->
-    <form action="#" id="searchFlights">
+    <form id="searchFlights">
         <div class="row gap-3 align-items-center mb-3">
             <div class="col-md">
-                <div class="d-flex items-center gap-3">
-                    <div class="">
-                        <label for="one-way">
-                            <input type="radio" name="flights" id="one-way" value="one-way" checked>
-                            <span>
-                                One Way
-                            </span>
-                        </label>
-                    </div>
-                    <div class="">
-                        <label for="round-trip">
-                            <input type="radio" name="flights" id="round-trip" value="round-trip">
-                            <span>
-                                Round Trip
-                            </span>
-                        </label>
-                    </div>
-                    <div class="">
-                        <label for="multi-way">
-                            <input type="radio" name="flights" id="multi-way" value="multi-way">
-                            <span>
-                                Round Trip
-                            </span>
-                        </label>
-                    </div>
+                <div class="flights-toggle">
+                    <!-- Hidden radio inputs -->
+                    <input type="radio" name="flights" id="one-way" value="one-way" checked>
+                    <label for="one-way">One Way</label>
+
+                    <input type="radio" name="flights" id="round-trip" value="round-trip">
+                    <label for="round-trip">Round Trip</label>
+
+                    <input type="radio" name="flights" id="multi-way" value="multi-way">
+                    <label for="multi-way">Multi Way</label>
                 </div>
             </div>
+
+            <!-- Flight Class || Select -->
             <div class="col-md">
                 <div class="d-flex justify-content-end">
                     <div class="col-12 col-sm-6">
@@ -75,88 +61,99 @@
                 </div>
             </div>
         </div>
-        <div class="row row-gap-3 align-items-center">
-            <div class="col-md">
-                <select id="flight-from" class="form-select text-capitalize"
-                    aria-label="Default select example">
-                    <option></option>
-                    <option class="text-capitalize" value="faisalabad">faisalabad</option>
-                    <option class="text-capitalize" value="lahore">lahore</option>
-                    <option class="text-capitalize" value="islamabad">islamabad</option>
-                    <option class="text-capitalize" value="multan">multan</option>
-                </select>
-            </div>
-            <div class="col-md">
-                <select id="flight-to" class="form-select text-capitalize" aria-label="Default select example">
-                    <option></option>
-                    <option class="text-capitalize" value="faisalabad">faisalabad</option>
-                    <option class="text-capitalize" value="lahore">lahore</option>
-                    <option class="text-capitalize" value="islamabad">islamabad</option>
-                    <option class="text-capitalize" value="multan">multan</option>
-                </select>
 
+
+
+        <div class="row row-gap-3 align-items-center">
+            <!-- Origin || Select -->
+            <div class="col-md">
+                <div class="airport-search-container">
+                    <div class="airport-search-input-wrapper">
+                        <!-- This box will be updated with the airport code -->
+                        <div class="airport-code-box-input"></div>
+                        <input type="text" name="origin" class="airport-search-input" placeholder="Origin" />
+                    </div>
+                    <ul class="airport-search-results"></ul>
+                </div>
             </div>
+
+            <!-- Destination || Select -->
+            <div class="col-md">
+                <div class="airport-search-container">
+                    <div class="airport-search-input-wrapper">
+                        <!-- This box will be updated with the airport code -->
+                        <div class="airport-code-box-input"></div>
+                        <input type="text" name="destination" class="airport-search-input" placeholder="Destination" />
+                    </div>
+                    <ul class="airport-search-results"></ul>
+                </div>
+            </div>
+
+            <!-- DatePicker || Departure && Return -->
             <div class="col-md">
                 <div class="row row-gap-3">
                     <div class="col-md">
-                        <input type="text" class="w-100 form-control" id="depart-date"
+                        <input type="text" class="w-100 form-control"
+                            name="departure_date"
+                            id="departure-date"
                             placeholder="Depart Date">
                     </div>
                     <div class="col-md" id="return-date-wrapper">
-                        <input type="text" class="w-100 form-control" id="return-date"
+                        <input type="text"
+                            name="return_date"
+                            class="w-100 form-control"
+                            id="return-date"
                             placeholder="Return Date">
                     </div>
                 </div>
             </div>
+
+            <!-- Travelers Dropdown (updated) -->
             <div class="col-md">
-                <div class="dropdown">
-                    <button class="btn bg-white border w-100 text-start" type="button" id="travelerDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Travelers: 0
-                    </button>
-                    <ul class="dropdown-menu p-3 w-100" aria-labelledby="travelerDropdown"
-                        style="width: 200px !important;">
-                        <li>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span>Adults</span>
-                                <div>
-                                    <button class="btn btn-outline-secondary btn-sm decrease"
-                                        data-type="adults-decrease">-</button>
-                                    <span class="mx-2 count" data-type="adults">0</span>
-                                    <button class="btn btn-outline-secondary btn-sm increase"
-                                        data-type="adults-increase">+</button>
-                                </div>
+                <div class="travelers-counter">
+                    <!-- The summary input shows the total count and is used for form submission -->
+                    <input type="text" name="travelers" class="travelers-summary" readonly value="Travelers: 0">
+
+                    <!-- Dropdown with travelers controls -->
+                    <div class="travelers-dropdown">
+                        <div class="travelers-item adults">
+                            <span class="label">Adults</span>
+                            <div class="counter">
+                                <button type="button" class="decrease">-</button>
+                                <span class="count">0</span>
+                                <input type="hidden" name="adults" class="hidden-input">
+                                <button type="button" class="increase">+</button>
                             </div>
-                        </li>
-                        <li>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span>Children</span>
-                                <div>
-                                    <button class="btn btn-outline-secondary btn-sm decrease"
-                                        data-type="children-decrease">-</button>
-                                    <span class="mx-2 count" data-type="children">0</span>
-                                    <button class="btn btn-outline-secondary btn-sm increase"
-                                        data-type="children-increase">+</button>
-                                </div>
+                        </div>
+                        <div class="travelers-item children">
+                            <span class="label">Children</span>
+                            <div class="counter">
+                                <button type="button" class="decrease">-</button>
+                                <span class="count">0</span>
+                                <input type="hidden" name="children" class="hidden-input">
+                                <button type="button" class="increase">+</button>
                             </div>
-                        </li>
-                        <li>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span>Infants</span>
-                                <div>
-                                    <button class="btn btn-outline-secondary btn-sm decrease"
-                                        data-type="infants-decrease">-</button>
-                                    <span class="mx-2 count" data-type="infants">0</span>
-                                    <button class="btn btn-outline-secondary btn-sm increase"
-                                        data-type="infants-increase">+</button>
-                                </div>
+                        </div>
+                        <div class="travelers-item infants">
+                            <span class="label">Infants</span>
+                            <div class="counter">
+                                <button type="button" class="decrease">-</button>
+                                <span class="count">0</span>
+                                <input type="hidden" name="infants" class="hidden-input">
+                                <button type="button" class="increase">+</button>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
+            <!-- Hidden Max Results Field -->
+            <input type="hidden" name="max_results" value="3">
+
+            <!-- Form Submit Button -->
             <div class="col-md-2">
-                <input type="submit" id="flight-form-submit" class="btn btn-primary w-100" value="Search">
+                <input type="submit" class="btn btn-primary w-100" value="Search">
             </div>
         </div>
     </form>
@@ -270,3 +267,7 @@
 
 
 </div>
+<!-- </section> -->
+
+
+<div id="search-results"></div>

@@ -4,22 +4,16 @@ class FlightSearch {
   }
 
   initEvents() {
-    $("#flight-search-form").on("submit", (e) => this.handleSubmit(e));
+    $("#searchFlights").on("submit", (e) => this.handleSubmit(e));
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    let formData = {
-      origin: $("#origin").val(),
-      destination: $("#destination").val(),
-      departure_date: $("#departure_date").val(),
-      return_date: $("#return_date").val(),
-      adults: $("#adults").val(),
-      max_results: $("#max_results").val(),
-    };
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
 
-    this.fetchFlights(formData);
+    this.fetchFlights(data);
   }
 
   fetchFlights(formData) {
@@ -36,16 +30,20 @@ class FlightSearch {
   }
 
   handleSuccess(response) {
-    if (response.error) {
+    // console.log(response);
+
+    // return;
+
+    if (!response.success) {
       $("#search-results").html(`<p>Error: ${response.error}</p>`);
-    } else {
-      let resultsHtml = "<ul>";
-      response.forEach((flight) => {
-        resultsHtml += `<li>${flight.origin} to ${flight.destination} - ${flight.price}</li>`;
-      });
-      resultsHtml += "</ul>";
-      $("#search-results").html(resultsHtml);
+      return;
     }
+    let resultsHtml = "<ul>";
+    response.forEach((flight) => {
+      resultsHtml += `<li>${flight.origin} to ${flight.destination} - ${flight.price}</li>`;
+    });
+    resultsHtml += "</ul>";
+    $("#search-results").html(resultsHtml);
   }
 
   handleError(error) {
@@ -54,9 +52,9 @@ class FlightSearch {
   }
 }
 
-export default FlightSearch;
-
 // Initialize the class when document is ready
-// $(document).ready(() => {
-//   new FlightSearch();
-// });
+jQuery(document).ready(() => {
+  new FlightSearch();
+});
+
+export default FlightSearch;

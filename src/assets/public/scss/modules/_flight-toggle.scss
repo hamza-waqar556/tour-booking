@@ -1,0 +1,58 @@
+// Variables
+$toggle-bg: #f1f1f1;
+$toggle-border: #ccc;
+$toggle-active-bg: #007bff;
+$toggle-active-color: #fff;
+$toggle-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$toggle-padding: 10px;
+$toggle-transition: 0.3s;
+
+// Mixin for toggle labels
+@mixin toggle-label {
+  display: block;
+  text-align: center;
+  padding: $toggle-padding;
+  cursor: pointer;
+  font-family: $toggle-font-family;
+  background-color: $toggle-bg;
+  color: inherit;
+  transition: background-color $toggle-transition, color $toggle-transition;
+}
+
+// Flights Toggle Container
+.flights-toggle {
+  display: flex;
+  border: 1px solid $toggle-border;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%; // or a fixed width if desired
+
+  // Hide the radio inputs
+  input[type="radio"] {
+    display: none;
+  }
+
+  // Style the labels as toggle buttons
+  label {
+    flex: 1;
+    @include toggle-label;
+    border-right: 1px solid $toggle-border;
+
+    // Remove right border on the last label
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  // Use the adjacent sibling selector to style the active label.
+  input[type="radio"]:checked + label {
+    background-color: $toggle-active-bg;
+    color: $toggle-active-color;
+  }
+
+  // Optional: Add hover effects
+  label:hover {
+    background-color: lighten($toggle-active-bg, 20%);
+    color: $toggle-active-color;
+  }
+}

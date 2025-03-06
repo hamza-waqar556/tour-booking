@@ -1,0 +1,93 @@
+// Variables
+$font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$primary-color: #333;
+$button-bg: #f8f9fa;
+$button-border: 1px solid #ccc;
+$button-hover-bg: #e9ecef;
+$dropdown-bg: #fff;
+$dropdown-border: 1px solid #ccc;
+$dropdown-width: 100%;
+$padding: 10px;
+
+// Mixin for button styles
+@mixin button-styles {
+  background-color: $button-bg;
+  border: $button-border;
+  color: $primary-color;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: $font-family;
+  &:hover {
+    background-color: $button-hover-bg;
+  }
+}
+
+// Travelers Counter Styles
+.travelers-counter {
+  position: relative;
+  width: 200px;
+
+  // Summary input styling
+  .travelers-summary {
+    width: 100%;
+    padding: $padding;
+    font-family: $font-family;
+    border: $button-border;
+    background-color: $button-bg;
+    cursor: pointer;
+    box-sizing: border-box;
+    // Remove default input styling
+    outline: none;
+  }
+
+  // Dropdown container
+  .travelers-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: $dropdown-width;
+    background-color: $dropdown-bg;
+    border: $dropdown-border;
+    z-index: 10;
+    padding: $padding;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+    .travelers-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      // Last item: remove bottom margin
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .label {
+        flex: 1;
+        font-family: $font-family;
+      }
+
+      .counter {
+        display: flex;
+        align-items: center;
+
+        button {
+          @include button-styles;
+          width: 30px;
+          height: 30px;
+          font-size: 16px;
+          text-align: center;
+        }
+
+        .count {
+          width: 30px;
+          text-align: center;
+          font-family: $font-family;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

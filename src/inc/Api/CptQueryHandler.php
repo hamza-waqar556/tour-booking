@@ -98,9 +98,9 @@ class CptQueryHandler
 //     ->getResults();
 
 // Example Usage:
-// $results = (new CptQueryHandler())
-//     ->setPostType('hotel')
-//     ->whereMeta('_from_airport', 'JFK')
-//     ->whereMeta('_to_airport', 'LAX')
-//     ->whereMeta('_duration', 15)
-//     ->getResults();
+$results = (new CptQueryHandler())
+    ->setPostType('hotel')
+    ->whereMeta('_from_airport', 'JFK')
+    ->whereMeta('_to_airport', 'LAX')
+    ->whereMeta('_duration', 15)
+    ->getResults();
