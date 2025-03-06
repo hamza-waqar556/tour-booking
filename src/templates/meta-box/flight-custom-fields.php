@@ -160,3 +160,4 @@ wp_nonce_field('flight_fields_nonce_action', 'flight_fields_nonce');
     <div id="flight-currency" data-options='["PKR", "USD", "EUR"]'></div>
     <input type="hidden" name="flight_currency" id="flight-currency-input" value="<?php echo esc_attr($flight_currency); ?>">
 </div>
+// ? This is the end of the file
