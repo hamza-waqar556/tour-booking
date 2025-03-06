@@ -4,7 +4,7 @@
  * @package TourBooking
  */
 
-namespace Inc\Data;
+namespace Inc\Data\Flights;
 // ! Pending
 use \Inc\Api\CptQueryHandler;
 
@@ -24,12 +24,13 @@ class GetCptFlights
     public function flightsResponse()
     {
         $results = $this->queryHandler
-            ->setPostType('hotel')
+            ->setPostType('flight')
             ->whereMeta('_from_airport', 'JFK')
             ->whereMeta('_to_airport', 'LAX')
             ->whereMeta('_duration', 15)
             ->getResults();
 
+        $this->response = $results;
         return $this;
     }
 }
