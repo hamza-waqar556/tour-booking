@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package TourBooking
  */
@@ -11,7 +12,7 @@ use \Inc\Api\MetaBoxGenerator;
 class CreateMetaBoxes extends BaseController
 {
     public $mb_generator;
-    public $meta_boxes = [  ];
+    public $meta_boxes = [];
 
     public function register()
     {
@@ -25,45 +26,105 @@ class CreateMetaBoxes extends BaseController
         $this->meta_boxes = [
             [
                 'flight',
-                [ 'status', 'refundable', 'flight_airlines', 'from_airport', 'to_airport', 'departure_time', 'arrival_time', 'user_email', 'adult_seat_price', 'child_seat_price', 'infant_seat_price', 'duration', 'baggage', 'cabin_baggage', 'flight_type', 'flight_currency' ],
+                [
+                    'status',
+                    'refundable',
+                    'flight_airlines',
+                    'from_airport',
+                    'to_airport',
+                    'departure_time',
+                    'arrival_time',
+                    'user_email',
+                    'adult_seat_price',
+                    'child_seat_price',
+                    'infant_seat_price',
+                    'duration',
+                    'baggage',
+                    'cabin_baggage',
+                    'flight_type',
+                    'flight_currency'
+                ],
                 'flight_fields_nonce',
                 'flight_fields_nonce_action',
                 'flight-custom-fields.php',
-             ],
+            ],
             [
                 'hotel',
-                [ 'status', 'featured', 'check_in', 'check_out', 'hotel_currency', 'user_email', 'refundable', 'star', 'rating', 'hotel_amenities', 'booking_age', 'hotel_location','hotel_address', 'hotel_location_code', 'hotel_email', 'hotel_website', 'hotel_phone' ],
+                [
+                    'status',
+                    'featured',
+                    'check_in',
+                    'check_out',
+                    'hotel_currency',
+                    'user_email',
+                    'refundable',
+                    'star',
+                    'rating',
+                    'hotel_amenities',
+                    'booking_age',
+                    'hotel_location',
+                    'hotel_address',
+                    'hotel_location_code',
+                    'hotel_email',
+                    'hotel_website',
+                    'hotel_phone'
+                ],
                 'hotel_fields_nonce',
                 'hotel_fields_nonce_action',
                 'hotel-custom-fields.php',
-             ],
+            ],
             [
                 'tour',
-                [ 'tour_currency', 'refundable', 'star', 'rating', 'tour_inclusions', 'tour_exclusions', 'adult_tour_price', 'child_tour_price', 'tour_location' ],
+                [
+                    'tour_currency',
+                    'refundable',
+                    'star',
+                    'rating',
+                    'tour_inclusions',
+                    'tour_exclusions',
+                    'adult_tour_price',
+                    'child_tour_price',
+                    'tour_location'
+                ],
                 'tour_fields_nonce',
                 'tour_fields_nonce_action',
                 'tour-custom-fields.php',
-             ],
-             [
+            ],
+            [
                 'car_booking',
-                [  'refundable', 'car_currency', 'star', 'rating', 'city_code', 'car_price' ],
+                [
+                    'refundable',
+                    'car_currency',
+                    'star',
+                    'rating',
+                    'city_code',
+                    'car_price'
+                ],
                 'car_booking_fields_nonce',
                 'car_booking_fields_nonce_action',
                 'car-custom-fields.php',
-             ],
+            ],
             [
                 'api',
-                [ 'status', 'api_name', 'api_type', 'api_key', 'secret_key', 'markup' ],
+                [
+                    'status',
+                    'api_name',
+                    'api_type',
+                    'api_key',
+                    'secret_key',
+                    'markup'
+                ],
                 'api_fields_nonce',
                 'api_fields_nonce_action',
                 'api-form.php',
-             ],
+            ],
 
-         ];
+        ];
 
-        foreach ( $this->meta_boxes as $meta_box ) {
-            list( $cpt, $fields, $nonce_name, $nonce_action, $template_path ) = $meta_box;
-            $this->mb_generator->setConfig( $cpt, $fields, $nonce_name, $nonce_action, $template_path );
+        foreach ($this->meta_boxes as $meta_box)
+        {
+            list($cpt, $fields, $nonce_name, $nonce_action, $template_path) = $meta_box;
+            $this->mb_generator->setConfig($cpt, $fields, $nonce_name, $nonce_action, $template_path);
         }
     }
 }
